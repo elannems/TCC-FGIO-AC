@@ -1,0 +1,60 @@
+.cnew-metabox-label {
+    font-weight: 600;
+}
+
+.cnew-metabox-input {
+    width: 100%;
+}
+
+.cnew-metabox-input#cnew-start-date,
+.cnew-metabox-input#cnew-end-date,
+.cnew-metabox-input#cnew-reg-date-birth,
+.cnew-metabox-input#cnew-reg-parent-phone {
+    width: 30%;
+}
+
+.cnew-metabox-input#cnew-vacancies {
+    width: 10%;
+}
+
+.cnew-required {
+    color: #ff0000;
+}
+
+.cnew-metabox-div {
+    margin-bottom: 5px;
+}
+
+label.error {
+    background: #f2dede;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+    color: #a94442;
+    display: inline-block;
+    padding: 0 5px;    
+}
+
+.cnew-link-success {
+    color: #5cb85c !important;
+}
+
+.cnew-link-success:hover {
+    color: #68c768 !important;
+}
+
+.cnew-link-danger {
+    color: #c9302c !important;
+}
+
+.cnew-link-danger:hover {
+    color: #e65f5b !important;
+}
+
+.cnew-link-warning {
+    color: #ec971f !important;
+}
+
+.cnew-link-warning:hover {
+    color: #f0ad4e !important;
+}
+

@@ -1,0 +1,269 @@
+.cnew-content *,
+.cnew-form *,
+.cnew-wrap *,
+.cnew-paginate * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+article.type-cnew_workshop {
+    padding: 50px 0px;
+    margin: 0px;
+}
+
+.wrap .cnew-entry-header {
+    text-align: center;
+}
+
+.wrap .cnew-entry-header h1.cnew-entry-title {
+    font-size: 36px;
+    color: #111;
+    clear: none;
+    line-height: 40px;
+    margin: 0px 0px 10px 0px;
+    font-family: 'Bitter', sans-serif;
+}
+
+.wrap .cnew-entry-header span {
+    margin: 0px 10px;
+}
+
+.wrap .cnew-entry-header .cnew-entry-meta {
+    color: #999;
+    font-size: 13px;
+}
+
+.wrap .cnew-entry-content, 
+.wrap .cnew-entry-summary,
+.wrap .cnew-form {
+    margin: 1.5em 0 0;
+}
+
+.wrap .cnew-readmore,
+.cnew-form #registration-submit {
+    background: #35bff2;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.wrap .cnew-readmore,
+.cnew-form #registration-submit {
+    padding: 7px 20px;
+    border-radius: 3px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.wrap .cnew-readmore a:link, 
+.wrap .cnew-readmore a:visited,
+.wrap .cnew-form a:link, 
+.wrap .cnew-form a:visited {
+    color: #fff;
+}
+
+.cnew-paginate {
+    margin: 50px 0px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.cnew-paginate a:link, 
+.cnew-paginate a:visited {
+    background: #f3f3f3;
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 10px;
+    color: #999 !important;
+    border-radius: 20px;
+}
+
+.cnew-paginate span {
+    color: #fff;
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 10px;
+    background: #35bff2;
+    border-radius: 20px;
+}
+
+.cnew-workshop-notice {
+    background: #f2dede;
+    border-radius: 4px;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+    margin: 10px;
+    padding: 10px;
+}
+
+.cnew-workshop-notice.cnew-success {
+    background: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}
+
+.cnew-workshop-notice.cnew-warning {
+    background: #fcf8e3;
+    border-color: #faebcc;
+    color: #8a6d3b;
+}
+
+.wrap .cnew-post-thumbnail {
+    border: 0;
+    display: block;
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+.wrap .cnew-entry-content th {
+    font-weight: bold;
+    padding: 5px;
+    width: 20%;
+}
+
+.wrap .cnew-entry-content table.cnew-table-content {
+    border: 1px solid #f0f0f0;
+    padding: 10px;
+    width: 100%; 
+    word-wrap:break-word;
+    table-layout: fixed;
+}
+
+.wrap .cnew-entry-content td {
+    padding: 5px;
+    width: 80%;
+}
+
+.wrap .cnew-entry-footer {
+    display: block;
+    margin-top: 10px;
+}
+
+.cnew-before-form ul {
+    list-style: disc !important;
+    margin: 0px !important;
+}
+
+.cnew-before-form .cnew-workshop-title {
+    color: #111;
+    text-align: center;
+}
+
+.cnew-form fieldset {
+    padding: 5px 10px 10px;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+}
+
+.cnew-form legend {
+    font-size: 1.4em;
+}
+
+.cnew-form .cnew-form-group {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.cnew-form .cnew-form-radio {
+    display: block;
+}
+
+.cnew-form label,
+.cnew-workshops-filter-div label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.cnew-form .cnew-input-text,
+.cnew-workshops-filter-div select {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+.cnew-form .cnew-input-text:focus,
+.cnew-workshops-filter-div select:focus { 
+    border-color: #66afe9 !important;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+}
+
+.cnew-form #cnew-reg-date-birth,
+.cnew-form #cnew-reg-parent-phone {
+    width: 20%;
+}
+
+.cnew-form #registration-submit {
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.cnew-form .cnew-required {
+    color: #ff0000;
+}
+
+.cnew-form .cnew-input-text.cnew-error {
+    border-color: #a94442 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.cnew-form .cnew-input-text.cnew-error:focus {
+    border-color: #843534 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;
+}
+
+.cnew-form .cnew-form-radio.cnew-error {
+    color: #a94442;
+}
+
+.cnew-form label.error {
+    background: #f2dede;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+    color: #a94442;
+    font-weight: 400;
+    display: inline-block;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+
+.cnew-workshops-filter-div {
+    text-align: right;
+}
+
+.cnew-workshops-filter-div label,
+.cnew-workshops-filter-div select {
+    display: inline-block;
+}
+
+.cnew-workshops-filter-div select {
+    width: 200px;
+}
+
+.wrap div.cnew-workshop-notice ul {
+    padding-left: 40px;
+}
