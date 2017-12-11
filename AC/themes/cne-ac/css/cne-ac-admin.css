@@ -1,0 +1,51 @@
+.cne-metabox-label {
+    font-weight: 600;
+}
+
+.cne-metabox-input {
+    width: 100%;
+}
+
+.cne-required {
+    color: #ff0000;
+}
+
+.cne-metabox-div {
+    margin-bottom: 5px;
+}
+
+label.error {
+    background: #f2dede;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+    color: #a94442;
+    display: inline-block;
+    padding: 0 5px;    
+}
+
+.buddypress.toplevel_page_bp-groups ul.subsubsub {
+    display: none;
+}
+
+/*
+ * Altera os icones
+ */
+
+#adminmenu #menu-posts-forum .wp-menu-image:before {
+    content: "\f318" !important;
+}
+
+#adminmenu #menu-posts-topic .wp-menu-image:before {
+    content: "\f175" !important;
+}
+
+#adminmenu #menu-posts-reply .wp-menu-image:before {
+    content: "\f473" !important;
+}
+
+#adminmenu #toplevel_page_bp-groups .wp-menu-image:before, 
+#adminmenu #toplevel_page_bp-groups_network .wp-menu-image:before, 
+#adminmenu #toplevel_page_bp-groups_user .wp-menu-image:before {
+    content: "\f307" !important;
+}
+
