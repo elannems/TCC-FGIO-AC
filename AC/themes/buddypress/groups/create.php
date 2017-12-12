@@ -1,8 +1,6 @@
 <?php
 /**
  * BuddyPress - Groups Create
- *
- * @package cne-ac 
  */
 
 do_action( 'bp_before_create_group_page' ); ?>

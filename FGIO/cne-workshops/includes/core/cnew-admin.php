@@ -217,22 +217,22 @@ if ( !class_exists( 'CNEW_Admin' ) ) :
         function cnew_admin_menus() {
 
             //pagina de configuracao do plugin
-            add_submenu_page( 'edit.php?post_type=cnew_workshop', __('Configurações', 'cnew'), __('Configurações', 'cnew'), 'manage_options', 'cnew_setting', array( $this, 'cnew_plugin_settings_page' ) );
+            add_submenu_page( 'edit.php?post_type=cnew_workshop', __('Configurações', 'cnew'), __('Configurações', 'cnew'), 'update_core', 'cnew_setting', array( $this, 'cnew_plugin_settings_page' ) );
 
             //paginas que executam as acoes relacionadas ao envio de e-mail
-            add_submenu_page( null, __('Enviar E-mails', 'cnew'), __('Enviar E-mails', 'cnew'), 'manage_options', 'cnew_confirm_send_emails', array( $this, 'cnew_confirm_send_emails' ) );
-            add_submenu_page( null, __('Resultado - Enviar E-mails', 'cnew'), __('Resultado - Enviar E-mails', 'cnew'), 'manage_options', 'cnew_send_emails', array( $this, 'cnew_send_emails' ) );
+            add_submenu_page( null, __('Enviar E-mails', 'cnew'), __('Enviar E-mails', 'cnew'), 'update_core', 'cnew_confirm_send_emails', array( $this, 'cnew_confirm_send_emails' ) );
+            add_submenu_page( null, __('Resultado - Enviar E-mails', 'cnew'), __('Resultado - Enviar E-mails', 'cnew'), 'update_core', 'cnew_send_emails', array( $this, 'cnew_send_emails' ) );
 
             //paginas que executam as acoes relacionadas a criacao de contas de usuarios, e necessario que o plugin buddypress esteja ativado
             if ( function_exists( 'buddypress' ) && get_option( 'users_can_register' ) ) {
-                add_submenu_page( null, __('Criar Usuários', 'cnew'), __('Criar Usuários', 'cnew'), 'manage_options', 'cnew_confirm_create_user', array( $this, 'cnew_confirm_create_user' ) );
-                add_submenu_page( null, __('Resultado - Criar Usuários', 'cnew'), __('Resultado - Criar Usuários', 'cnew'), 'manage_options', 'cnew_create_user', array( $this, 'cnew_create_user' ) );
+                add_submenu_page( null, __('Criar Usuários', 'cnew'), __('Criar Usuários', 'cnew'), 'update_core', 'cnew_confirm_create_user', array( $this, 'cnew_confirm_create_user' ) );
+                add_submenu_page( null, __('Resultado - Criar Usuários', 'cnew'), __('Resultado - Criar Usuários', 'cnew'), 'update_core', 'cnew_create_user', array( $this, 'cnew_create_user' ) );
             }
         }
 
         function cnew_confirm_send_emails() {
 
-            if( !current_user_can( 'manage_options' ) || empty( $_GET['action'] ) ) {
+            if( !current_user_can( 'update_core' ) || empty( $_GET['action'] ) ) {
 
                 wp_die( __( 'Não foi possível executar sua solicitação! Por favor, verifique se você tem acesso a esta funcionalidade.','cnew' ), 
                         __( 'ERRO', 'cnew'), 
@@ -351,7 +351,7 @@ if ( !class_exists( 'CNEW_Admin' ) ) :
 
         function cnew_send_emails() {
 
-            if ( !current_user_can( 'manage_options' ) ) {
+            if ( !current_user_can( 'update_core' ) ) {
                 wp_die( __( 'Não foi possível executar sua solicitação! Por favor, verifique se você tem acesso a esta funcionalidade.','cnew' ), 
                         __( 'ERRO', 'cnew'), 
                         array( 'back_link' => true ) 
@@ -418,7 +418,7 @@ if ( !class_exists( 'CNEW_Admin' ) ) :
 
         function cnew_confirm_create_user() {
 
-            if( !current_user_can( 'manage_options' ) || empty( $_GET['action'] ) ) {
+            if( !current_user_can( 'update_core' ) || empty( $_GET['action'] ) ) {
 
                 wp_die( __( 'Não foi possível executar sua solicitação! Por favor, verifique se você tem acesso a esta funcionalidade.','cnew' ), 
                         __( 'ERRO', 'cnew'), 
@@ -514,7 +514,7 @@ if ( !class_exists( 'CNEW_Admin' ) ) :
 
         function cnew_create_user() {
 
-            if ( !current_user_can( 'manage_options' ) ) {
+            if ( !current_user_can( 'update_core' ) ) {
                 wp_die( __( 'Não foi possível executar sua solicitação! Por favor, verifique se você tem acesso a esta funcionalidade.','cnew' ), 
                         __( 'ERRO', 'cnew'), 
                         array( 'back_link' => true ) 
@@ -745,7 +745,7 @@ if ( !class_exists( 'CNEW_Admin' ) ) :
 
             $is_valid_nonce = ( isset( $_POST[ 'cnew_metabox_nonce' ] ) && wp_verify_nonce( $_POST[ 'cnew_workshop_metabox_nonce' ], 'cnew_workshop_metabox_save' ) ) ? 'true' : 'false';
 
-            if( !$is_valid_nonce || !current_user_can( 'manage_options' )) {
+            if( !$is_valid_nonce || !current_user_can( 'update_core' )) {
                 return;
             }
 

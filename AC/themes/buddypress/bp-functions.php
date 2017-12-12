@@ -554,14 +554,14 @@ add_action( 'bp_actions', 'cne_ac_bp_profile_action_general' );
 /* Baseado em: <https://wordpress.stackexchange.com/questions/142517/remove-ability-to-access-certain-admin-menus>*/
 function cne_ac_restrict_bp_admin_pages() {
     
-//    $author = wp_get_current_user();
-//     
-//    if( isset( $author->roles[0] ) && isset( $author->roles[1] ) ) { 
-//        $role_site = $author->roles[0];
-//        $role_bbpress = $author->roles[1];
-//    } else {
-//        wp_die( __( 'You do not have permission to do that.' ) );
-//    }
+    $author = wp_get_current_user();
+     
+    if( isset( $author->roles[0] ) && isset( $author->roles[1] ) ) { 
+        $role_site = $author->roles[0];
+        $role_bbpress = $author->roles[1];
+    } else {
+        wp_die( __( 'You do not have permission to do that.' ) );
+    }
     
     $current_screen_id = get_current_screen()->id;
     
@@ -585,21 +585,22 @@ function cne_ac_restrict_bp_admin_pages() {
         $restricted_screens[] = 'toplevel_page_bp-groups';
     }
     
-    /*if( !isset( $role_site ) || $role_site != 'administrator' ) {
-        
-        //die(var_dump($current_screen_id));
-        $restricted_screens = array(
-            'settings_page_bp-components',
-            'settings_page_bp-page-settings',
-            'settings_page_bp-settings',
-            //'edit-bp-email', 
-            //'bp-email', 
-            'edit-post', 
-            'post', 
-            //'bp-email_page_bp-emails-customizer-redirect', 
-        );
-
-    }*/
+    if(!isset( $role_site ) || $role_site == 'subscriber') {
+        $restricted_screens[] = 'edit-comments';
+        $restricted_screens[] = 'edit-post';
+        $restricted_screens[] = 'post';
+    }
+    
+    if( !isset( $role_site ) || $role_site != 'administrator' ) {
+        $restricted_screens[] = 'options-general';
+        $restricted_screens[] = 'options-writing';
+        $restricted_screens[] = 'options-reading';
+        $restricted_screens[] = 'options-discussion';
+        $restricted_screens[] = 'options-media';
+        $restricted_screens[] = 'options-permalink';
+        $restricted_screens[] = 'tools';
+    }
+    
     foreach ( $restricted_screens as $restricted_screen ) {
 
         if ( $current_screen_id === $restricted_screen ) {
@@ -630,25 +631,15 @@ function remove_menus(){
     if( !bbp_is_user_keymaster()) {
         remove_menu_page('bp-groups'); //Groups BP
     }
-//    if( $role_site != 'administrator') {
-//        remove_menu_page( 'options-general.php' );        //Settings
-//        remove_menu_page( 'tools.php' );                  //Tools
-//        remove_menu_page( 'themes.php' );                 //Appearance
-//        remove_menu_page( 'edit-comments.php' );          //Comments
-//        remove_menu_page( 'upload.php' );          //media
-//        remove_menu_page( 'edit.php' );          //posts
-//        remove_menu_page( 'edit.php?post_type=cnew_workshop' );
-//        
-//    }
-  //remove_menu_page( 'edit.php' );                   //Posts
-  //remove_menu_page( 'edit-comments.php' );          //Comments
-  
-  //remove_menu_page( 'themes.php' );                 //Appearance
-  //remove_menu_page( 'users.php' );                  //Users
-  //remove_menu_page( 'tools.php' );                  //Tools
-  //remove_menu_page( 'options-general.php' );        //Settings
-
-  //remove_menu_page( 'upload.php' );        //Settings
+    
+    if( $role_site != 'administrator') {
+        remove_menu_page( 'tools.php' ); 
+    }
+    
+    if($role_site == 'subscriber') {
+        remove_menu_page( 'edit-comments.php' );          //Comments
+        remove_menu_page( 'edit.php' );          //posts
+    }
   
 }
 add_action( 'admin_menu', 'remove_menus' );

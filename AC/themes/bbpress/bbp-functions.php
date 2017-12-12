@@ -245,6 +245,8 @@ function cne_ac_bbp_get_caps_for_role( $caps, $role ){
             $caps['manage_options'] = true;
             $caps['edit_posts'] = true;
             $caps['edit_users'] = true;
+            $caps['edit_published_pages'] = true;
+            $caps['edit_others_pages'] = true;
             $caps['create_users'] = true;
             $caps['list_users'] = true;
             $caps['delete_users'] = true;
