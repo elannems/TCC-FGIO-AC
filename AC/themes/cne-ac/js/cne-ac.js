@@ -1,4 +1,7 @@
 jQuery(document).ready(function( $ ) {
+    /* 
+     * Configuracao do slick
+    */
     $('.cne-carousel').slick({
       dots: true,
       infinite: true,
@@ -6,7 +9,8 @@ jQuery(document).ready(function( $ ) {
       slidesToShow: 3,
       slidesToScroll: 3
     });
-       
+    
+    /* === INICIO VALIDACAO CADASTRO DE USUARIO NO AC === */
     $.validator.addMethod(
         "userValidator",
         function(value, element) {
@@ -95,8 +99,12 @@ jQuery(document).ready(function( $ ) {
         if( !$("#basic-details-section:visible :input").valid() ) {
             return;
         }
-    }); 
+    });
+    /* === FIM VALIDACAO CADASTRO DE USUARIO NO AC === */
 
+    /* 
+     * Cadastro de usuario no AC: verifica se menor de idade antes de ir para proximo passo do cadastro
+    */
     $(".cne-next-step").click(function() {
         if( $("#profile-details-section:visible :input").valid() ){
             /* Baseado em <https://stackoverflow.com/questions/4060004/calculate-age-given-the-birth-date-in-the-format-yyyymmdd> */
@@ -115,13 +123,19 @@ jQuery(document).ready(function( $ ) {
         }
     });
     
+    /* 
+     * Nao exibe o botao cne-btn-load-more enquanto houver menos de 5 comentarios
+    */
     if($(".bbp-replies div.reply").length<=5){
             $("#cne-btn-load-more").hide();
     }else {
         $("#cne-btn-load-more").show();
     }
     
-    /* Baseado em <https://codepen.io/elmahdim/pen/sGkvH> */
+    /* 
+     * Exibe 5 comentarios cada vez que o botao cne-btn-load-more e acionado
+     * Baseado em <https://codepen.io/elmahdim/pen/sGkvH> 
+    */
     $(".bbp-replies div.reply").slice(0, 5).show();
     $("#cne-btn-load-more").on('click', function (e) {
         e.preventDefault();
@@ -135,26 +149,9 @@ jQuery(document).ready(function( $ ) {
         }, 1500);
     });
     
+    /* 
+     * Adiciona a classe alert alert-warning do bootstrap no bbp-template-notice
+    */
     $(".bbp-template-notice").attr('class', 'alert alert-warning');
         
-    //equalHeight($(".thumbnail")); 
-    //equalHeight($(".caption"));
-    //equalHeight($(".cne-thumbnail-middle"));
-
 });
-
-/* extraido de <http://jsfiddle.net/PbfpU/2/> */
-/*function equalHeight(group) {    
-    tallest = 0;
-    group.each(function($) {       
-        thisHeight = $(this).height();       
-        if(thisHeight > tallest) {          
-            tallest = thisHeight;       
-        }    
-    })( jQuery );;    
-    group.each(function($) { 
-        $(this).height(tallest); 
-    })( jQuery );;
-} */
-
-

@@ -1,7 +1,6 @@
 jQuery(document).ready(function($){
     
-    console.log('js admin');
-    
+    /* === INICIO VALIDACAO FORM TOPICO === */
     $('#post')
     .validate({
         rules : {
@@ -37,6 +36,7 @@ jQuery(document).ready(function($){
             }
         }
     });
+    /* === FIM VALIDACAO FORM TOPICO === */
     
 });
         
