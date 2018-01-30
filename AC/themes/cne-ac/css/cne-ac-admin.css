@@ -28,9 +28,8 @@ label.error {
 }
 
 /*
- * Altera os icones
+ * Altera os icones do buddypress e bbpress
  */
-
 #adminmenu #menu-posts-forum .wp-menu-image:before {
     content: "\f318" !important;
 }

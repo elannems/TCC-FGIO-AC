@@ -1,7 +1,3 @@
-/*--------------------------------------------------------------
-## Colaboração
---------------------------------------------------------------*/
-
 .page-template-cne-ac .container,
 .bbpress .container,
 .buddypress .container {
@@ -44,59 +40,10 @@ body.buddypress {
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif !important;
 }
 
-/*section {
-    padding: 80px 0;
-}
-
-section.main-content {
-    padding: 15px 0;
-}
-
-section h2 {
-    margin: 20px 0 40px;
-}
-
-section h3 {
-    margin: 30px 0 10px;
-}*/
-
 .cne-ac .entry-header h1.entry-title {
     margin-bottom: 10px;
     margin-top: 0;
 }
-
-/*.screen-reader-text {
-    clip: rect(1px, 1px, 1px, 1px);
-    clip-path: polygon(0px 0px, 0px 0px,0px 0px, 0px 0px);
-    position: absolute !important;
-    white-space: nowrap;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-}
-
-.screen-reader-text:focus {
-    clip: auto !important;
-    display: block;
-    height: auto;
-    left: 5px;
-    top: 5px;
-    width: auto;
-    z-index: 100000; /* Above WP toolbar. */
-/*}
-
-
-/*html {
-    font-size: 62.5% !important;
-}
-
-/*img {
-    *max-width: 100% !important;
-}*/
-
-/*.navbar-default {
-    border-top: none;
-}*/
 
 nav.site-navigation a {
     color: #888 !important;
@@ -105,10 +52,6 @@ nav.site-navigation a {
 nav.site-navigation .sf-menu ul li a {
     color: #fff !important;
 }
-
-/*.navbar-default .current_page_item > a {
-    font-style: italic;
-}*/
 
 a.btn.btn-default {
     background-color: #35bff2 !important;
@@ -172,10 +115,6 @@ button.btn-default:hover, html input[type="button"].btn-default:hover, input[typ
 input[type="text"]#members_search {
     font-weight: 400;
 }
-
-/*--------------------------------------------------------------
-## bbPress
---------------------------------------------------------------*/
 
 .bbp-user-section a.btn.btn-danger {
     color: #ffffff !important;
@@ -331,10 +270,6 @@ span.cne-required {
     cursor: default;
 }
 
-/*.ui.centered.cards {
-    clear: both;
-}*/
-
 .btn-default {
     *background: #35bff2;
     *padding: 7px 20px;
@@ -354,10 +289,6 @@ span.cne-required {
     filter: alpha(opacity=60) !important;
     border: none !important;
 }
-/*.ui.cards .card .image img {
-    max-height: 200px;
-    height: 200px;
-}*/
 
 .cne-meta-box-input {
     width: 100%;
@@ -523,8 +454,6 @@ span.cne-required {
 .cne-bbp-topic-header,
 .cne-bbp-topic-footer {
     border: 1px solid #c0c0c0;
-    /*margin: auto;
-    max-width: 800px;*/
     padding: 10px;
 }
 
@@ -588,6 +517,7 @@ span.cne-required {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 .cne-bbp-topic-footer i {
     color: #ffffff;
 }
