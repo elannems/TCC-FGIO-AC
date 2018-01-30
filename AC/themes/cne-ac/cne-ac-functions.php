@@ -20,7 +20,6 @@ function cne_ac_load_scripts(){
 }
 add_action('wp_enqueue_scripts','cne_ac_load_scripts');
 
-
 /*
  * Carrega os scripts necessarios para a area administrativa do wordpress
  */
