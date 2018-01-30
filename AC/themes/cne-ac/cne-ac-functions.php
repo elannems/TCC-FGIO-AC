@@ -22,7 +22,7 @@ add_action('wp_enqueue_scripts','cne_ac_load_scripts');
 
 
 /*
- * Carrega os scripts necessarios na area administrativa do wordpress
+ * Carrega os scripts necessarios para a area administrativa do wordpress
  */
 function cne_ac_load_scripts_admin( ) { 
     if( function_exists( 'bbpress' ) && function_exists( 'buddypress' ) ) {
@@ -60,6 +60,9 @@ add_filter( 'ajax_query_attachments_args', 'cne_ac_show_current_user_attachments
  */
 add_filter( 'show_admin_bar', '__return_false' );
 
+/*
+ * Listagem das regras de utilizacao do AC
+ */
 function cne_ac_rules_list() {
     echo '<div class="cne-rules-list">
             <ul>
@@ -89,7 +92,7 @@ function cne_ac_block_users_admin_area() {
 add_action( 'init', 'cne_ac_block_users_admin_area' );
 
 /*
- * Adiciona os menus de Perfil, Sair, Cadastre-se e Entrar em um menu com dropdown
+ * Adiciona os itens de menu Perfil, Sair, Cadastre-se e Entrar no item de menu informado na pag de configuracao do AC
  */
 function cne_ac_menu_login_logout( $items, $menu ) {
     
@@ -187,6 +190,9 @@ function cne_ac_remove_bp_help_tabs() {
 }
 add_action( 'admin_head', 'cne_ac_remove_bp_help_tabs', 999);
 
+/*
+ * Adiciona pag de configuracao do AC no administrativo do WP
+ */
 function cne_ac_admin_menus() {
 
     add_options_page( __('Configurações do Ambiente Colaborativo', 'cne-ac'), __('Ambiente Colaborativo', 'cne-ac'), 'manage_options', 'cne_ac_setting', 'cne_ac_create_admin_page' );
@@ -194,6 +200,9 @@ function cne_ac_admin_menus() {
 }
 add_action( 'admin_menu', 'cne_ac_admin_menus' );
 
+/*
+ * Cria pag de configuracao do AC
+ */
 function cne_ac_create_admin_page(){
 ?>
     <div class="wrap">
@@ -234,6 +243,9 @@ function cne_ac_create_admin_page(){
 <?php
 }
 
+/*
+ * Adiciona na pag de configuracao do AC itens de configuracao do plugin buddypress
+ */
 function cne_ac_bp_core_admin_slugs_options() {
     $existing_pages = bp_core_get_directory_page_ids();
 
@@ -248,16 +260,16 @@ function cne_ac_bp_core_admin_slugs_options() {
         
         <tr valign="top">
             <th scope="row">
-                    <label for="bp_pages[<?php echo esc_attr( $name ) ?>]"><?php echo esc_html( $label ) ?></label>
+                <label for="bp_pages[<?php echo esc_attr( $name ) ?>]"><?php echo esc_html( $label ) ?></label>
             </th>
 
             <td>
 
                 <?php echo wp_dropdown_pages( array(
-                        'name'             => 'bp_pages[' . esc_attr( $name ) . ']',
-                        'echo'             => false,
-                        'show_option_none' => __( '- Nenhum -', 'cne-ac' ),
-                        'selected'         => !empty( $existing_pages[$name] ) ? $existing_pages[$name] : false
+                    'name'             => 'bp_pages[' . esc_attr( $name ) . ']',
+                    'echo'             => false,
+                    'show_option_none' => __( '- Nenhum -', 'cne-ac' ),
+                    'selected'         => !empty( $existing_pages[$name] ) ? $existing_pages[$name] : false
                 ) ); ?>
 
             </td>
@@ -286,10 +298,10 @@ function cne_ac_bp_core_admin_slugs_options() {
                 <td>
 
                     <?php echo wp_dropdown_pages( array(
-                            'name'             => 'bp_pages[' . esc_attr( $name ) . ']',
-                            'echo'             => false,
-                            'show_option_none' => __( '- Nenhum -', 'cne-ac' ),
-                            'selected'         => !empty( $existing_pages[$name] ) ? $existing_pages[$name] : false
+                        'name'             => 'bp_pages[' . esc_attr( $name ) . ']',
+                        'echo'             => false,
+                        'show_option_none' => __( '- Nenhum -', 'cne-ac' ),
+                        'selected'         => !empty( $existing_pages[$name] ) ? $existing_pages[$name] : false
                     ) ) ?>
 
                 </td>
@@ -303,11 +315,14 @@ function cne_ac_bp_core_admin_slugs_options() {
     do_action( 'bp_active_external_pages' );
 }
 
+/*
+ * Dropdown com as paginas adicionadas no WP
+ */
 function cne_ac_get_select_pages( $selected = 0, $name='', $id='' ) {
     
     echo wp_dropdown_pages( array(
                                     'name'             => 'cne_ac_' . esc_attr( $name ) . '_page_id',
-                                    'id'             => 'cne-ac-' . esc_attr( $id ) . '-page-id',
+                                    'id'               => 'cne-ac-' . esc_attr( $id ) . '-page-id',
                                     'echo'             => false,
                                     'show_option_none' => __( '- Nenhum -', 'cne-ac' ),
                                     'selected'         => $selected
@@ -315,6 +330,9 @@ function cne_ac_get_select_pages( $selected = 0, $name='', $id='' ) {
 
 }
 
+/*
+ * Registra as configuracoes do AC
+ */
 function cne_ac_register_settings() {
     register_setting( 'cne_ac_setting_admin', 'cne_ac_form_topic_page_id' );
     register_setting( 'cne_ac_setting_admin', 'cne_ac_parent_page_id' );
@@ -333,11 +351,17 @@ function cne_ac_register_settings() {
 }
 add_action( 'admin_init', 'cne_ac_register_settings' );
 
+/*
+ * Retorna a pag em que o formulario de novo ou edicao de topico deve ser exibido
+ */
 function cne_ac_get_form_topic_page_id() {
     $option = get_option( 'cne_ac_form_topic_page_id' );
     return( $option ) ? $option : 0;
 }
 
+/*
+ * Retorna o link da pag do formulario de novo ou edicao de topico
+ */
 function cne_ac_get_form_topic_page_link($area_id = '') {
     
     $link = '';
@@ -354,6 +378,10 @@ function cne_ac_get_form_topic_page_link($area_id = '') {
     
 }
 
+/*
+ * Retorna o id da pag em que deve ser adicionado os itens de menu Perfil, Sair, Cadastre-se e Entrar
+ * Observacao: caso a pag informada nao esteja no menu, os itens de menu Perfil, Sair, Cadastre-se e Entrar sao adicionados no menu principal
+ */
 function cne_ac_get_parent_page_id() {
     $option = get_option( 'cne_ac_parent_page_id' );
     return( $option ) ? $option : 0;

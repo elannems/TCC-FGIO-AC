@@ -12,7 +12,7 @@ get_header();
 
 <div class="cne-ac container">
     <div id="primary" class="content-area row">
-            <div id="content" class="site-content col-xs-12" role="main">
+        <div id="content" class="site-content col-xs-12" role="main">
             <?php while ( have_posts() ) : the_post(); ?>
                 <?php get_template_part('content', 'cne-ac'); ?>
             <?php endwhile; ?>
