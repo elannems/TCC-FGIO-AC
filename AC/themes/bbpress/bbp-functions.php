@@ -1,10 +1,10 @@
 <?php
 
-/*
+/**
  * BBPRESS
  */
 
-/*
+/**
  * Desabilita a edicao de forum
  */
 function cne_ac_disable_forum_edit() {
@@ -12,7 +12,7 @@ function cne_ac_disable_forum_edit() {
 }
 add_filter( 'bbp_is_forum_edit', 'cne_ac_disable_forum_edit' );
 
-/*
+/**
  * Verifica se existe imagem de destaque no post, senao adiciona imagem padrao
  */
 function cne_ac_card_image() {
@@ -25,7 +25,7 @@ function cne_ac_card_image() {
     endif;
 }
 
-/*
+/**
  * Ajusta imagem do topico para apresentar no perfil do usuario
  */
 function cne_ac_card_user_topic_image( $post_id ) {
@@ -38,7 +38,7 @@ function cne_ac_card_user_topic_image( $post_id ) {
     }
 }
 
-/*
+/**
  * Remove os widgets do bbpress
  */
 function cne_ac_bbp_remove_widgets() {
@@ -46,7 +46,7 @@ function cne_ac_bbp_remove_widgets() {
 }
 add_action( 'widgets_init', 'cne_ac_bbp_remove_widgets', 1 );
 
-/*
+/**
  * Remove os shortcodes nao utilizados do bbpress
  */
 function cne_ac_remove_bbp_shortcodes( $shortcodes ) {
@@ -61,7 +61,7 @@ function cne_ac_remove_bbp_shortcodes( $shortcodes ) {
 } 
 add_filter( 'bbp_shortcodes', 'cne_ac_remove_bbp_shortcodes' );
 
-/* === ALTERA CUSTOM POST TYPE FORUM === */
+/* === INICIO ALTERA CUSTOM POST TYPE FORUM === */
 function cne_ac_bbp_get_forum_post_type_labels() {
 	$labels = array(
 		'name'               => __( 'Áreas de Conteúdo', 'cne_ac' ),
@@ -155,9 +155,9 @@ function cne_ac_bbp_set_title( $new_title ){
 
 }
 add_filter( 'bbp_before_title_parse_args', 'cne_ac_bbp_set_title' );
+/* === FIM ALTERA CUSTOM POST TYPE FORUM === */
 
-/* === ALTERA CUSTOM POST TYPE TOPIC === */
-
+/* === INICIO ALTERA CUSTOM POST TYPE TOPIC === */
 function cne_ac_bbp_get_topic_post_type_supports( $supports ) {
     $supports = array(
         'title',
@@ -185,8 +185,9 @@ function cne_ac_bbp_get_topic_caps( $array ) {
     return $array;
 }
 add_filter( 'bbp_get_topic_caps', 'cne_ac_bbp_get_topic_caps' );
+/* === FIM ALTERA CUSTOM POST TYPE TOPIC === */
 
-/* === ALTERA CUSTOM POST TYPE REPLY */
+/* === INICIO ALTERA CUSTOM POST TYPE REPLY */
 function cne_ac_bbp_get_reply_title_fallback( $reply_title, $post_id, $topic_title ) {
     $reply_title = sprintf( __( 'Resposta ao tópico: %s', 'bbpress', 'cne-ac' ), $topic_title );
     
@@ -229,7 +230,11 @@ function cne_ac_bbp_admin_replies_column_headers( $columns ) {
     return $columns;
 }
 add_filter( 'bbp_admin_replies_column_headers', 'cne_ac_bbp_admin_replies_column_headers' );
+/* === FIM ALTERA CUSTOM POST TYPE REPLY */
 
+/**
+ * Altera label da coluna bbp_user_role na pagina de usuarios na area administrativa do WP
+ */
 function cne_ac_manage_users_columns( $columns ) {
     $columns['bbp_user_role'] = __( 'Função no Ambiente Colaborativo', 'bbpress' );
 
@@ -237,8 +242,7 @@ function cne_ac_manage_users_columns( $columns ) {
 }
 add_filter( 'manage_users_columns', 'cne_ac_manage_users_columns', 11);
 
-/* === PERMISSOES DE ACESSO === */
-
+/* === INICIO PERMISSOES DE ACESSO === */
 function cne_ac_bbp_get_caps_for_role( $caps, $role ){
     switch ( $role ) {
         case bbp_get_keymaster_role() :
@@ -325,7 +329,11 @@ function cne_ac_remove_bbpress_roles(){
     
 }
 add_action( 'after_setup_theme', 'cne_ac_remove_bbpress_roles' );
+/* === FIM PERMISSOES DE ACESSO === */
 
+/**
+ * Especifica as tags que podem ser utilizadas no bbpress
+ */
 function cne_ac_bbp_kses_allowed_tags( $allowed_tags ) {
     $add_allowed_tags = array(
                             'h1'         => array(),
@@ -354,99 +362,20 @@ function cne_ac_bbp_kses_allowed_tags( $allowed_tags ) {
 }
 add_filter( 'bbp_kses_allowed_tags', 'cne_ac_bbp_kses_allowed_tags' );
 
-//add_action( 'edit_user_profile', 'remove_my_class_action',11 );
-//function remove_my_class_action(){
-
-//die(var_dump(class_exists('BBP_Users_Admin')));
-//	$result = remove_action( 'edit_user_profile', array( 'BBP_Users_Admin', 'secondary_role_display' ), 10 );
-        //die(var_dump($result));
-//}
-
-
-function cne_ac_secondary_role_display( $profileuser ) {
-    //die(var_dump($result));
-		// Bail if current user cannot edit users
-		if ( ! current_user_can( 'edit_user', $profileuser->ID ) )
-			return;
-
-		// Get the roles
-		$dynamic_roles = bbp_get_dynamic_roles();
-
-		// Only keymasters can set other keymasters
-		if ( ! bbp_is_user_keymaster() )
-			unset( $dynamic_roles[ bbp_get_keymaster_role() ] ); ?>
-
-		<h3><?php esc_html_e( 'Colaboração', 'cne_ac' ); ?></h3>
-
-		<table class="form-table">
-			<tbody>
-				<tr>
-					<th><label for="bbp-forums-role"><?php esc_html_e( 'Função no Ambiente Colaborativo', 'cne_ac' ); ?></label></th>
-					<td>
-
-						<?php $user_role = bbp_get_user_role( $profileuser->ID ); ?>
-
-						<select name="bbp-forums-role" id="bbp-forums-role">
-
-							<?php if ( ! empty( $user_role ) ) : ?>
-
-								<option value=""><?php esc_html_e( '&mdash; Nenhuma função no ambiente colaborativo &mdash;', 'cne_ac' ); ?></option>
-
-							<?php else : ?>
-
-								<option value="" selected="selected"><?php esc_html_e( '&mdash; Nenhuma função no ambiente colaborativo &mdash;', 'bbpress' ); ?></option>
-
-							<?php endif; ?>
-
-							<?php foreach ( $dynamic_roles as $role => $details ) : ?>
-
-								<option <?php selected( $user_role, $role ); ?> value="<?php echo esc_attr( $role ); ?>"><?php echo translate_user_role( $details['name'] ); ?></option>
-
-							<?php endforeach; ?>
-
-						</select>
-					</td>
-				</tr>
-
-			</tbody>
-		</table>
-
-		<?php
-	}
-        //add_action( 'edit_user_profile', 'cne_ac_secondary_role_display', 10 );
-
-
-/*function teste( $caps, $role ) {
-    die(var_dump($role));
-}
-add_filter( 'bbp_get_caps_for_role', 'teste', 10, 2 );*/
-
-/*function cne_ac_forum_title_icons() {
-    global $post;
-
-    if ( has_post_thumbnail($id_post) ) {
-        //echo get_the_post_thumbnail($id_post, array( 290,220 ), array('class' => 'forum-icon'));
-        echo the_post_thumbnail();
-    } else {
-        ?>
-        <img src="<?php echo bloginfo('stylesheet_directory'); ?>/assets/img/logo-cne.png">
-        <?php
-    }
-}
-add_action('bbp_theme_before_forum_header_title','cne_ac_forum_title_icons');
-
-/* ------------------------------------------------------------------------------- */ 
-        
+/**
+ * Verifica se o usuario atual pode realizar edicoes e exclusoes
+ */
 function cne_ac_current_user_can_edit_delete() {
     $user_can_edit_delete = false;
-  if ( bp_is_my_profile() || bbp_is_user_keymaster() ) {
-    $user_can_edit_delete = true;
-  }
-  return $user_can_edit_delete;
-}
-  
+    if ( bp_is_my_profile() || bbp_is_user_keymaster() ) {
+        $user_can_edit_delete = true;
+    }
+    return $user_can_edit_delete;
+} 
 
-// Adicionar um shortcode para add o formulario de "Novo Topico" em uma pagina
+/**
+ * Adiciona um shortcode para add o formulario de "Novo Topico" em uma pagina
+ */
 function cne_ac_bbp_create_new_topic(){
 
     $forum_id = isset($_GET['area_id']) ? (int)$_GET['area_id'] : 0; 
@@ -484,7 +413,6 @@ function cne_ac_is_forum_id_valid( $forum_id ) {
     return $id;
 }
 
-
 // Desativa breadcrumb do plugin
 add_filter( 'bbp_no_breadcrumb', '__return_true' );
 
@@ -494,12 +422,6 @@ function cne_ac_bbp_topic_like_count( ) {
     echo count($users);
 }
 
-
-/*function cne_ac_bbp_topic_subscriber_count( ) {
-    $users = bbp_get_topic_subscribers();
-    echo count($users);
-}*/
-
 function cne_bbp_header_title() {
     if( bbp_get_topic_id() ) {
             bbp_topic_title();
@@ -508,7 +430,7 @@ function cne_bbp_header_title() {
     }
 }
 
-/*
+/**
  * Adiciona shortcode para visualizar topicos recentes
  */ 
 add_shortcode('cne-ac-bbp-topicos-recentes', 'cne_ac_bbp_new_topics', 10);
@@ -521,32 +443,33 @@ function cne_bbp_new_topics_forum() {
         bbp_get_template_part( 'bbpress/loop-single', 'topic' );
 }
 
-/*
+/**
  * Exibe a idade cadastrada ao criar/editar topico
  */ 
 function cne_bbp_form_topic_age() {
     echo cne_bbp_get_form_topic_age();
 }
-    /*
-     * Retorna a idade cadastrada
-     */
-    function cne_bbp_get_form_topic_age() {
 
-            // Get _POST data
-            if ( bbp_is_post_request() && isset( $_POST['cne_bbp_topic_age'] ) ) {
-                    $topic_age = $_POST['cne_bbp_topic_age'];
+/**
+ * Retorna a idade cadastrada
+ */
+function cne_bbp_get_form_topic_age() {
 
-            // Get edit data
-            } elseif ( bbp_is_topic_edit() ) {
-                    $topic_age = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_age', true);
+    // Get _POST data
+    if ( bbp_is_post_request() && isset( $_POST['cne_bbp_topic_age'] ) ) {
+            $topic_age = $_POST['cne_bbp_topic_age'];
 
-            // No data
-            } else {
-                    $topic_age = '';
-            }
+    // Get edit data
+    } elseif ( bbp_is_topic_edit() ) {
+            $topic_age = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_age', true);
 
-            return esc_attr( $topic_age );
+    // No data
+    } else {
+            $topic_age = '';
     }
+
+        return esc_attr( $topic_age );
+}
     
 function cne_ac_topic_age() {
     echo cne_ac_get_topic_age();

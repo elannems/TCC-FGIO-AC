@@ -1,10 +1,10 @@
 <?php
 
-/*
+/**
  * BUDDYPRESS
  */
 
-/*
+/**
  * - Remove a barra de menu do buddypress, pois a barra so sera visivel 
  *  para os usuarios com acesso a area de admin do wordpress;
  * - Remove os itens de menu do buddypress da wpadminbar
