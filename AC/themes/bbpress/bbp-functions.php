@@ -400,7 +400,9 @@ function cne_ac_get_topic_forum_id() {
     return $id;
 }
 
-// Verifica se o ID informado eh valido (id eh inteiro, post existe e post eh do tipo certo)
+/**
+ * Verifica se o ID informado e valido (id inteiro, post existe e post e do tipo certo)
+ */
 function cne_ac_is_forum_id_valid( $forum_id ) {
     $id = 0;
 
@@ -413,10 +415,14 @@ function cne_ac_is_forum_id_valid( $forum_id ) {
     return $id;
 }
 
-// Desativa breadcrumb do plugin
+/**
+ * Desativa breadcrumb do plugin
+ */
 add_filter( 'bbp_no_breadcrumb', '__return_true' );
 
-// Conta quantos usuarios marcaram um topico como favorito
+/**
+ * Conta quantos usuarios marcaram um topico como favorito
+ */
 function cne_ac_bbp_topic_like_count( ) {
     $users = bbp_get_topic_favoriters();
     echo count($users);
@@ -457,24 +463,30 @@ function cne_bbp_get_form_topic_age() {
 
     // Get _POST data
     if ( bbp_is_post_request() && isset( $_POST['cne_bbp_topic_age'] ) ) {
-            $topic_age = $_POST['cne_bbp_topic_age'];
+        $topic_age = $_POST['cne_bbp_topic_age'];
 
     // Get edit data
     } elseif ( bbp_is_topic_edit() ) {
-            $topic_age = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_age', true);
+        $topic_age = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_age', true);
 
     // No data
     } else {
-            $topic_age = '';
+        $topic_age = '';
     }
 
-        return esc_attr( $topic_age );
+    return esc_attr( $topic_age );
 }
-    
+
+/**
+ * Exibe a idade do usuario que criou o topico
+ */
 function cne_ac_topic_age() {
     echo cne_ac_get_topic_age();
 }
 
+/**
+ * Retorna a idade do usuario que criou o topico, se o usuario autorizou
+ */
 function cne_ac_get_topic_age() {
     $show_age = get_post_meta(bbp_get_topic_id(), 'cne_bbp_topic_age', true);
     $age = '';
@@ -490,72 +502,105 @@ function cne_ac_get_topic_age() {
     }
     return $age;
 }
-        
+
+/**
+ * Exibe a cidade do usuario que criou o topico
+ */
 function cne_bbp_form_topic_city() {
     echo cne_bbp_get_form_topic_city();
 }
+
+/**
+ * Retorna a cidade do usuario que criou o topico, se o usuario informou no form do topico
+ */
 function cne_bbp_get_form_topic_city() {
     if ( bbp_is_post_request() && isset( $_POST['cne_bbp_topic_city'] ) ) {
-            $topic_city = $_POST['cne_bbp_topic_city'];
+        $topic_city = $_POST['cne_bbp_topic_city'];
     } elseif ( bbp_is_topic_edit() ) {
-            $topic_city = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_city', true);
+        $topic_city = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_city', true);
     } else {
-            $topic_city = '';
+        $topic_city = '';
     }
 
     return esc_attr( $topic_city );
 }
 
+/**
+ * Exibe os objetivos do topico
+ */
 function cne_bbp_form_topic_objective() {
     echo cne_bbp_get_form_topic_objective();
 }
 
+/**
+ * Retorna os objetivos do topico
+ */
 function cne_bbp_get_form_topic_objective() {
     if ( bbp_is_post_request() && isset( $_POST['cne_bbp_topic_objective'] ) ) {
-            $topic_objective = $_POST['cne_bbp_topic_objective'];
+        $topic_objective = $_POST['cne_bbp_topic_objective'];
     } elseif ( bbp_is_topic_edit() ) {
-            $topic_objective = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_objective', true);
+        $topic_objective = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_objective', true);
     } else {
-            $topic_objective = '';
+        $topic_objective = '';
     }
     
     return apply_filters( 'cne_bbp_get_form_topic_objective', esc_attr( $topic_objective ) );
 }
 
+/**
+ * Exibe o autor do topico
+ */
 function cne_bbp_form_topic_author() {
 	echo cne_bbp_get_form_topic_author();
 }
 
+/**
+ * Retorna o autor do topico
+ */
 function cne_bbp_get_form_topic_author() {
     if ( bbp_is_post_request() && isset( $_POST['cne_bbp_topic_author'] ) ) {
-            $topic_author = $_POST['cne_bbp_topic_author'];
+        $topic_author = $_POST['cne_bbp_topic_author'];
     } elseif ( bbp_is_topic_edit() ) {
-            $topic_author = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_author', true);
+        $topic_author = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_author', true);
     } else {
-            $topic_author = '';
+        $topic_author = '';
     }
 
     return apply_filters( 'cne_bbp_get_form_topic_author', esc_attr( $topic_author ) );
 }
 
+/**
+ * Exibe a imagem de destaque do topico
+ */
 function cne_bbp_form_topic_image() {
 	echo cne_bbp_get_form_topic_image();
 }
+
+/**
+ * Retorna a imagem de destaque do topico
+ */
 function cne_bbp_get_form_topic_image() {
     if ( bbp_is_post_request() && isset( $_POST['cne_bbp_topic_image'] ) ) {
-            $topic_image = $_POST['cne_bbp_topic_image'];
+        $topic_image = $_POST['cne_bbp_topic_image'];
     } elseif ( bbp_is_topic_edit() ) {
-            $topic_image = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_image', true);
+        $topic_image = get_post_meta( bbp_get_topic_id(), 'cne_bbp_topic_image', true);
     } else {
-            $topic_image = '';
+        $topic_image = '';
     }
 
     return esc_attr( $topic_image );
 }
 
+/**
+ * Exibe a descricao do topico
+ */
 function cne_bbp_form_topic_desc() {
 	echo cne_bbp_get_form_topic_desc();
 }
+
+/**
+ * Retorna a descricao do topico
+ */
 function cne_bbp_get_form_topic_desc() {
     if ( bbp_is_post_request() && isset( $_POST['cne_bbp_topic_desc'] ) ) {
             $topic_desc = $_POST['cne_bbp_topic_desc'];
@@ -568,13 +613,15 @@ function cne_bbp_get_form_topic_desc() {
     return esc_attr( $topic_desc );
 }
 
+/**
+ * Valida os campos customizados do formulario de criacao e edicao de um topico
+ */
 function cne_ac_bbp_validate_custom_fields( $post_id ) {
     
     $author = isset( $_POST['cne_bbp_topic_author'] ) ? $_POST['cne_bbp_topic_author'] : '' ;
     $desc = isset( $_POST['cne_bbp_topic_desc'] ) ? $_POST['cne_bbp_topic_desc'] : '';
     $city = isset( $_POST['cne_bbp_topic_city'] ) ? $_POST['cne_bbp_topic_city'] : ''; //publico
     $objective = isset( $_POST['cne_bbp_topic_objective'] ) ? $_POST['cne_bbp_topic_objective'] : ''; //privado
-    //$image = isset( $_POST['cne_bbp_topic_image'] ) ? $_POST['cne_bbp_topic_image'] : '';
     
     $is_private = cne_ac_is_secao_privado( bbp_get_topic_forum_id( $post_id ) );
     
@@ -589,11 +636,6 @@ function cne_ac_bbp_validate_custom_fields( $post_id ) {
     if( ( strlen( $desc ) > 160 ) || ( strlen( $author ) > 100 ) || ( $is_private && strlen( $objective ) > 255 ) || ( !$is_private && strlen( $city ) > 100 ) ) :
         bbp_add_error( 'bbp_topic_maxlength', __( '<strong>Erro</strong>: Algum campo excede o limite de caracteres. Por favor, revise o formulário.', 'cne-ac' ) );
     endif;
-    
-    /*if ( !empty( $image ) && !validate_file( $image, array( '.jpg', '.jpeg', '.png' ) ) ) :
-        bbp_add_error( 'bbp_topic_desc', __( '<strong>Erro</strong>: Por favor, adicione uma imagem em um dos seguintes extenções: jpg, jpeg ou png.', 'cne-ac' ) );
-    endif;
-    $teste = wp_check_filetype( $image, array( 'jpg', 'jpeg', 'png' ) );*/
         
 }
 add_action( 'bbp_new_topic_pre_extras', 'cne_ac_bbp_validate_custom_fields' );
@@ -601,7 +643,7 @@ add_action( 'bbp_edit_topic_pre_extras', 'cne_ac_bbp_validate_custom_fields' );
 
 function cne_ac_remove_validate_forum_id() {
     if( bbp_has_errors() ) {
-       bbpress()->errors->remove('bbp_topic_forum_id');
+        bbpress()->errors->remove('bbp_topic_forum_id');
     }
 }
 add_action( 'bbp_edit_topic_pre_extras', 'cne_ac_remove_validate_forum_id' );
@@ -612,9 +654,6 @@ function cne_ac_bbp_edit_topic_pre_insert( $array ) {
     return $array;
 }
 add_filter( 'bbp_edit_topic_pre_insert', 'cne_ac_bbp_edit_topic_pre_insert' ); 
-
-add_action ( 'bbp_new_topic', 'cne_bbp_save_custom_fields', 10, 1 );
-add_action ( 'bbp_edit_topic', 'cne_bbp_save_custom_fields', 10, 1 );
 
 function cne_ac_add_filter_topic_content( $deprecated, $attr, $content = null ) {
     return $content;
@@ -628,9 +667,9 @@ function cne_bbp_save_custom_fields( $post_id ) {
     require_once(ABSPATH . "wp-admin" . '/includes/file.php');
     require_once(ABSPATH . "wp-admin" . '/includes/media.php');
 
-    $file_handler = 'cne_bbp_topic_image'; //Form attachment Field name.
+    $file_handler = 'cne_bbp_topic_image'; 
     $attach_id = media_handle_upload( $file_handler, $post_id );
-    //making it featured!
+    
     set_post_thumbnail($post_id, $attach_id );
 
     $author = $_POST['cne_bbp_topic_author'];
@@ -657,6 +696,8 @@ function cne_bbp_save_custom_fields( $post_id ) {
 
     }
 }
+add_action ( 'bbp_new_topic', 'cne_bbp_save_custom_fields', 10, 1 );
+add_action ( 'bbp_edit_topic', 'cne_bbp_save_custom_fields', 10, 1 );
 
 function cne_ac_button_topic_parent() {
     global $post;
@@ -666,10 +707,9 @@ function cne_ac_button_topic_parent() {
 }
 
 function custom_bbp_show_lead_topic( $show_lead ) {
-  $show_lead[] = 'true';
-  return $show_lead;
+    $show_lead[] = 'true';
+    return $show_lead;
 }
- 
 add_filter('bbp_show_lead_topic', 'custom_bbp_show_lead_topic' );
 
 function cne_ac_custom_bbp_topic_tag_list() {
@@ -682,7 +722,9 @@ function cne_ac_custom_bbp_topic_tag_list() {
     return bbp_topic_tag_list( 0, $args );                 
 }
 
-//customiza o link de retorno da funcao bbp_get_reply_to_link()
+/**
+ * Customiza o link de retorno da funcao bbp_get_reply_to_link()
+ */
 function cne_ac_custom_bbp_reply_to_link( $retval, $r ) {
     $r['reply_text'] = '<i class="fa fa-reply" title="'. __( 'Responder', 'cne-ac' ).'"></i>';
     
@@ -690,20 +732,20 @@ function cne_ac_custom_bbp_reply_to_link( $retval, $r ) {
     
     if ( bbp_thread_replies() ) {
 
-            $move_form = array(
-                    $r['add_below'] . '-' . $reply->ID,
-                    $reply->ID,
-                    $r['respond_id'],
-                    $reply->post_parent
-            );
+        $move_form = array(
+                $r['add_below'] . '-' . $reply->ID,
+                $reply->ID,
+                $r['respond_id'],
+                $reply->post_parent
+        );
 
-            $onclick  = ' onclick="return addReply.moveForm(\'' . implode( "','", $move_form ) . '\');"';
+        $onclick  = ' onclick="return addReply.moveForm(\'' . implode( "','", $move_form ) . '\');"';
 
     } else {
-            $onclick  = '';
+        $onclick  = '';
     }
     
-    $retval   = $r['link_before'] . '<a href="' . esc_url( $r['uri'] ) . '" class="bbp-reply-to-link"' . $onclick . '>' . $r['reply_text'] . '</a>' . $r['link_after'];
+    $retval = $r['link_before'] . '<a href="' . esc_url( $r['uri'] ) . '" class="bbp-reply-to-link"' . $onclick . '>' . $r['reply_text'] . '</a>' . $r['link_after'];
     
     return $retval;
 }
@@ -711,13 +753,11 @@ add_filter( 'bbp_get_reply_to_link', 'cne_ac_custom_bbp_reply_to_link', 10, 2);
 
 function cne_ac_custom_bbp_topic_favorite_link( $args ) {
     $args['before'] = __('Gostou?', 'cne-ac');
-    //$args['after'] = '</span>';
     $args['favorite'] = '<i class="fa fa-heart-o" aria-hidden="true"></i>';
     $args['favorited'] = '<i class="fa fa-heart" aria-hidden="true"></i>';   
     
     return $args;
 }
-
 add_filter( 'bbp_after_get_forum_favorite_link_parse_args', 'cne_ac_custom_bbp_topic_favorite_link');
 add_filter( 'bbp_before_get_user_favorites_link_parse_args', 'cne_ac_custom_bbp_topic_favorite_link');
 
@@ -745,18 +785,18 @@ function cne_ac_get_topic_alert_link() {
                 return;
         }
 
-        $uri     = add_query_arg( array( 'action' => 'cne_ac_bbp_toggle_topic_report', 'topic_id' => $topic->ID ) );
-        $uri     = wp_nonce_url( $uri, 'report-topic_' . $topic->ID );
+        $uri = add_query_arg( array( 'action' => 'cne_ac_bbp_toggle_topic_report', 'topic_id' => $topic->ID ) );
+        $uri = wp_nonce_url( $uri, 'report-topic_' . $topic->ID );
         if ( $reported === true ) {
-                $title = __( 'Remover denúncia deste tópico', 'cne-ac' );
-                $label = __('Remover denúncia:', 'cne-ac');
-                $class = 'fa fa-eraser';
+            $title = __( 'Remover denúncia deste tópico', 'cne-ac' );
+            $label = __('Remover denúncia:', 'cne-ac');
+            $class = 'fa fa-eraser';
         } else {
-                $title = __( 'Denunciar este tópico', 'cne-ac' );
-                $label = __('Denunciar:', 'cne-ac');
-                $class = 'fa fa-bullhorn';
+            $title = __( 'Denunciar este tópico', 'cne-ac' );
+            $label = __('Denunciar:', 'cne-ac');
+            $class = 'fa fa-bullhorn';
         }
-        $retval  = '<a href="' . esc_url( $uri ) . '" class="cne-btn-circle cne-alert" title="' . esc_attr( $title ) . '"><i class="'. esc_attr( $class ) . '" aria-hidden="true"></i></a>';
+        $retval = '<a href="' . esc_url( $uri ) . '" class="cne-btn-circle cne-alert" title="' . esc_attr( $title ) . '"><i class="'. esc_attr( $class ) . '" aria-hidden="true"></i></a>';
 
         echo esc_html( $label );
         echo $retval;
@@ -772,26 +812,26 @@ function cne_ac_get_reply_alert_link() {
         $reply = bbp_get_reply( bbp_get_reply_id() );
 
         if ( empty( $reply ) )
-                return;
+            return;
 
         $reported = cne_ac_is_reply_reported( $reply->ID );
 
         if ( $reported && ! current_user_can( 'moderate', $reply->ID ) ) {
-                return;
+            return;
         }
 
-        $uri     = add_query_arg( array( 'action' => 'cne_ac_bbp_toggle_reply_report', 'reply_id' => $reply->ID ) );
-        $uri     = wp_nonce_url( $uri, 'report-reply_' . $reply->ID );
+        $uri = add_query_arg( array( 'action' => 'cne_ac_bbp_toggle_reply_report', 'reply_id' => $reply->ID ) );
+        $uri = wp_nonce_url( $uri, 'report-reply_' . $reply->ID );
         if ( $reported === true ) {
-                $title = __( 'Remover denúncia deste comentário', 'cne-ac' );
-                $label = __('Remover denúncia:', 'cne-ac');
-                $class = 'fa fa-eraser';
+            $title = __( 'Remover denúncia deste comentário', 'cne-ac' );
+            $label = __('Remover denúncia:', 'cne-ac');
+            $class = 'fa fa-eraser';
         } else {
-                $title = __( 'Denunciar este comentário', 'cne-ac' );
-                $label = __('Denunciar:', 'cne-ac');
-                $class = 'fa fa-bullhorn';
+            $title = __( 'Denunciar este comentário', 'cne-ac' );
+            $label = __('Denunciar:', 'cne-ac');
+            $class = 'fa fa-bullhorn';
         }
-        $retval   = '<a href="' . esc_url( $uri ) . '" class="cne-btn-circle cne-alert" title="' .esc_attr( $title ) . '"><i class="'. esc_attr( $class ) . '" aria-hidden="true"></i></a>';
+        $retval = '<a href="' . esc_url( $uri ) . '" class="cne-btn-circle cne-alert" title="' .esc_attr( $title ) . '"><i class="'. esc_attr( $class ) . '" aria-hidden="true"></i></a>';
         
         echo $retval;
         
@@ -932,7 +972,7 @@ function cne_ac_custom_meta_box_forum( $post ) {
     echo '<input name="ping_status" type="hidden" id="ping_status" value="open" />';
 }
 
-/*
+/**
  * Salva os dados do Custom Meta Box
  */ 
 function cne_ac_meta_boxes_save( $post_id, $post ) {
@@ -965,8 +1005,7 @@ function cne_ac_meta_boxes_save( $post_id, $post ) {
         
         cne_ac_meta_boxes_topic_save( $post_id );
     }
-    
-        
+           
 }
 add_action( 'save_post', 'cne_ac_meta_boxes_save', 10, 2 );
 
@@ -985,7 +1024,6 @@ function cne_ac_meta_boxes_topic_save( $post_id ) {
     $objective = sanitize_text_field( isset( $_POST['cne_bbp_topic_objective'] ) ? stripslashes( $_POST['cne_bbp_topic_objective'] ) : '' );
     $desc = sanitize_text_field( isset( $_POST['cne_bbp_topic_desc'] ) ? stripslashes( $_POST['cne_bbp_topic_desc'] ) : '' );
     $author = sanitize_text_field( isset( $_POST['cne_bbp_topic_author'] ) ? stripslashes( $_POST['cne_bbp_topic_author'] ) : '' );
-    
     
     global $form_error;
      
@@ -1067,7 +1105,6 @@ function cne_ac_get_list_post_ids( $meta_key = '', $meta_value = '', $post_type 
 
 function cne_ac_display_forums( $attr, $content = '' ) {
 
-    // Sanity check required info
     if ( !empty( $content ) || ( empty( $attr['tipo'] ) ) )
             return $content;
 
@@ -1080,23 +1117,11 @@ function cne_ac_display_forums( $attr, $content = '' ) {
         return $content;
     }
     
-    //if ( !bbp_is_forum_archive() ) {
-        add_filter( 'bbp_before_has_forums_parse_args', 'cne_ac_custom_bbp_forums_args' ) ;
-    //}
+    add_filter( 'bbp_before_has_forums_parse_args', 'cne_ac_custom_bbp_forums_args' ) ;
     
-    
-
-    // Start output buffer
     cne_ac_bbp_start( 'bbp-archive-forum' );
 
-    // Check forum caps
-    //if ( bbp_user_can_view_forum( array( 'forum_id' => $forum_id ) ) ) {
     bbp_get_template_part( 'content',  'archive-forum' );
-
-    // Forum is private and user does not have caps
-    //} elseif ( bbp_is_forum_private( $forum_id, false ) ) {
-    //        bbp_get_template_part( 'feedback', 'no-access'    );
-    //}
     
     return cne_ac_bbp_end();
 }
@@ -1104,19 +1129,15 @@ function cne_ac_display_forums( $attr, $content = '' ) {
 add_shortcode('cne-ac-bbp-areas', 'cne_ac_display_forums');
 
 function cne_ac_bbp_start( $query_name = '' ) {
-    // Set query name
     bbp_set_query_name( $query_name );
 
-    // Start output buffer
     ob_start();
 }
 
 function cne_ac_bbp_end(){
     
-    // Reset the query name
     bbp_reset_query_name();
 
-    // Return and flush the output buffer
     return ob_get_clean();
 }
 
@@ -1128,9 +1149,12 @@ function cne_ac_custom_bbp_forums_args( $args ) {
     return $args;
 }
 
-//<https://bbpress.org/forums/topic/change-posting-order/>
+/**
+ * <https://bbpress.org/forums/topic/change-posting-order/>
+ */
 function cne_ac_reverse_reply_order( $query = array() ) {
-    if ( empty( $query ) ) return;
+    if ( empty( $query ) ) 
+        return;
     
     $query['order']='DESC';
     
@@ -1144,7 +1168,7 @@ function cne_ac_get_secao_tipo( $forum_id = 0 ) {
     $tipo = get_post_meta( $forum_id, 'cne_ac_secao_tipo', true );
 
     if ( !isset( $tipo ) )
-            $tipo = 'publico';
+        $tipo = 'publico';
 
     return $tipo;
 }
@@ -1154,7 +1178,7 @@ function cne_ac_is_secao_privado( $forum_id = 0 ) {
     $retval = false;
 
     if ( cne_ac_get_secao_tipo( $forum_id ) == 'privado' )
-            $retval = true;
+        $retval = true;
 
     return $retval;
         
@@ -1177,20 +1201,20 @@ function cne_ac_verify_secao_tipo( $retval ) {
 add_filter( 'bbp_current_user_can_access_create_topic_form', 'cne_ac_verify_secao_tipo' );
 
 
-/* 
+/** 
  * Baseado no plugin "LS oEmbed support for Scratch Mit", feito por: lenasterg, NTS on CTI.gr. 
  * Disponivel em: <https://br.wordpress.org/plugins/ls-oembed-support-for-scratch-mit/>
- * O código do plugin foi adaptado para embutir somente os links de projetos do scratch adicionados no campo de conteúdo de um topico
+ * O codigo do plugin foi adaptado para embutir somente os links de projetos do scratch adicionados no campo de conteudo de um topico
  */
 function cne_ac_add_embed_scratch( $content ) {
     $args = wp_embed_defaults() ;
    	if ($args['width'] >=485 ) {
-		$width='485';
-		$height ='402';
+            $width='485';
+            $height ='402';
 	}
 	else {
-		$width=$args['width'] ;
-		$height = round( $width * 402 / 485 );
+            $width=$args['width'] ;
+            $height = round( $width * 402 / 485 );
 	}
         
     preg_match_all('/<a\s(.*?)href="(http|https):\/\/scratch.mit.edu\/projects\/(\w+)\/"(.*?)>(.*?)<\/a>/', $content, $matches);
@@ -1221,13 +1245,14 @@ function cne_ac_remove_html_reply( $content ) {
 }
 add_filter( 'bbp_new_reply_pre_content', 'cne_ac_remove_html_reply' );
 
-/* === MOVER TOPICO PARA LIXEIRA === */
+/**
+ * Mover topico para lixeira 
+ */
 function cne_ac_bbp_get_topic_trash_link( ) {
     $topic   = bbp_get_topic( bbp_get_topic_id() );
     if ( empty( $topic ) || ( !bbp_is_user_keymaster() && !current_user_can( 'trash_topics', $topic->ID ) ) ) {
         return;
     }
-    
     
     if( cne_ac_is_topic_reported( $topic->ID ) )
         return;
@@ -1237,20 +1262,21 @@ function cne_ac_bbp_get_topic_trash_link( ) {
     }
 
     if ( EMPTY_TRASH_DAYS ) {
-            $link = '<a title="' . esc_attr__( 'Excluir tópico',      'cne-ac' ) . '" href="' . esc_url( wp_nonce_url( add_query_arg( array( 'action' => 'cne_ac_bbp_toggle_topic_trash', 'sub_action' => 'trash', 'topic_id' => $topic->ID ) ), 'trash-'   . $topic->post_type . '_' . $topic->ID ) ) . '" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash-o"></i></a>';
+        $link = '<a title="' . esc_attr__( 'Excluir tópico',      'cne-ac' ) . '" href="' . esc_url( wp_nonce_url( add_query_arg( array( 'action' => 'cne_ac_bbp_toggle_topic_trash', 'sub_action' => 'trash', 'topic_id' => $topic->ID ) ), 'trash-'   . $topic->post_type . '_' . $topic->ID ) ) . '" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash-o"></i></a>';
     }
 
     return $link;
 }
 
-/* === MOVER COMENTARIO PARA LIXEIRA === */
+/**
+ * Mover comentario para lixeira
+ */
 function cne_ac_bbp_get_reply_trash_link( ) {
 
     $reply   = bbp_get_reply( bbp_get_reply_id() );
     if ( empty( $reply ) || ( !bbp_is_user_keymaster() && !current_user_can( 'trash_replies', $reply->ID ) ) ) {
         return;
     }
-    
     
     if( cne_ac_is_reply_reported( $reply->ID ) )
         return;
@@ -1260,14 +1286,14 @@ function cne_ac_bbp_get_reply_trash_link( ) {
     }
 
     if ( EMPTY_TRASH_DAYS ) {
-            $link = '<a title="' . esc_attr__( 'Excluir comentário', 'cne-ac' ) . '" href="' . esc_url( wp_nonce_url( add_query_arg( array( 'action' => 'cne_ac_bbp_toggle_reply_trash', 'sub_action' => 'trash', 'reply_id' => $reply->ID ) ), 'trash-'   . $reply->post_type . '_' . $reply->ID ) ) . '" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash-o"></i></a>';
+        $link = '<a title="' . esc_attr__( 'Excluir comentário', 'cne-ac' ) . '" href="' . esc_url( wp_nonce_url( add_query_arg( array( 'action' => 'cne_ac_bbp_toggle_reply_trash', 'sub_action' => 'trash', 'reply_id' => $reply->ID ) ), 'trash-'   . $reply->post_type . '_' . $reply->ID ) ) . '" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash-o"></i></a>';
     }
 
     return $link;
 }
 
-/* === DENUNCIAR CONTEUDO === */
-/* 
+/* === INICIO DENUNCIAR CONTEUDO === */
+/** 
  * Baseado no plugin "bbpress-report-content", feito por: Josh Eaton <josh@josheaton.org>
  * Disponivel em: <https://br.wordpress.org/plugins/bbpress-report-content/>
  */
@@ -1308,609 +1334,597 @@ function cne_ac_add_topic_status_report( $statuses ) {
 }
 add_filter( 'bbp_get_topic_statuses', 'cne_ac_add_topic_status_report' ); 
 
-        function cne_ac_unreport_post( $post = 0 ) {
-            if ( empty( $post ) )
-                    return $post;
+function cne_ac_unreport_post( $post = 0 ) {
+    if ( empty( $post ) )
+        return $post;
 
-            if ( cne_ac_get_post_status_report() !== $post->post_status )
-                    return false;
+    if ( cne_ac_get_post_status_report() !== $post->post_status )
+        return false;
 
-            if ( !current_user_can( 'moderate', $post->ID ) )
-                    return false;
+    if ( !current_user_can( 'moderate', $post->ID ) )
+        return false;
 
-            $post->post_status = get_post_meta( $post->ID, 'cne_ac_bbp_report_meta_status', true );
-            
-            if ( empty( $post->post_status ) ) {
-                $post->post_status = bbp_get_public_status_id();
-            }
+    $post->post_status = get_post_meta( $post->ID, 'cne_ac_bbp_report_meta_status', true );
 
-            delete_post_meta( $post->ID, 'cne_ac_bbp_report_meta_status' );
+    if ( empty( $post->post_status ) ) {
+        $post->post_status = bbp_get_public_status_id();
+    }
 
-            delete_post_meta( $post->ID, 'cne_ac_bbp_report_user_id' );
+    delete_post_meta( $post->ID, 'cne_ac_bbp_report_meta_status' );
 
-            remove_action( 'pre_post_update', 'wp_save_post_revision' );
+    delete_post_meta( $post->ID, 'cne_ac_bbp_report_user_id' );
 
-            $post_id = wp_update_post( $post );
-            
-            return $post_id;
-	}
+    remove_action( 'pre_post_update', 'wp_save_post_revision' );
+
+    $post_id = wp_update_post( $post );
+
+    return $post_id;
+}
         
-        function cne_ac_report_post( $post = 0 ) {
+function cne_ac_report_post( $post = 0 ) {
 
-            if ( empty( $post ) )
-                    return $post;
+    if ( empty( $post ) )
+        return $post;
 
-            if (cne_ac_get_post_status_report() === $post->post_status )
-                    return false;
+    if (cne_ac_get_post_status_report() === $post->post_status )
+        return false;
 
-            update_post_meta( $post->ID, 'cne_ac_bbp_report_user_id', wp_get_current_user()->ID );
+    update_post_meta( $post->ID, 'cne_ac_bbp_report_user_id', wp_get_current_user()->ID );
 
-            add_post_meta( $post->ID, 'cne_ac_bbp_report_meta_status', $post->post_status );
+    add_post_meta( $post->ID, 'cne_ac_bbp_report_meta_status', $post->post_status );
 
-            $post->post_status = cne_ac_get_post_status_report();
+    $post->post_status = cne_ac_get_post_status_report();
 
-            remove_action( 'pre_post_update', 'wp_save_post_revision' );
+    remove_action( 'pre_post_update', 'wp_save_post_revision' );
 
-            $post_id = wp_update_post( $post );
+    $post_id = wp_update_post( $post );
 
-            return $post_id;
-	}
+    return $post_id;
+}
         
-        function cne_ac_topic_row_actions( $actions, $topic ) {
+function cne_ac_topic_row_actions( $actions, $topic ) {
 
-		if ( bbp_get_topic_post_type() != get_current_screen()->post_type ) 
-                    return $actions;
-                
-                //retira opcao de fixar topico
-		unset( $actions['stick'] );
-		unset( $actions['spam'] );
+    if ( bbp_get_topic_post_type() != get_current_screen()->post_type ) 
+        return $actions;
 
-		if ( current_user_can( 'moderate', $topic->ID ) ) {
-                    
-                        $report_uri  = wp_nonce_url( add_query_arg( array( 'topic_id' => $topic->ID, 'action' => 'cne_ac_bbp_toggle_topic_report' ), remove_query_arg( array( 'bbp_topic_toggle_notice', 'topic_id', 'failed', 'super' ) ) ), 'report-topic_'  . $topic->ID );
-			if ( cne_ac_is_topic_reported( $topic->ID ) )
-				$actions['report'] = '<a href="' . esc_url( $report_uri ) . '" title="' . esc_attr__( 'Remover denúncia deste tópico', 'cne-ac' ) . '">' . esc_html__( 'Remover Denúncia', 'cne-ac' ) . '</a>';
-                        else
-                            $actions['report'] = '<a href="' . esc_url( $report_uri ) . '" title="' . esc_attr__( 'Denunciar este tópico', 'cne-ac' ) . '">' . esc_html__( 'Denunciar', 'cne-ac' ) . '</a>';
+    //retira opcao de fixar topico
+    unset( $actions['stick'] );
+    unset( $actions['spam'] );
 
-		}
-                
-                if ( current_user_can( 'delete_topic', $topic->ID ) ) {
-                    if ( bbp_get_trash_status_id() === $topic->post_status ) {
-                        unset( $actions['report'] );
-                    }
+    if ( current_user_can( 'moderate', $topic->ID ) ) {
 
-                    if ( cne_ac_get_post_status_report() === $topic->post_status ) {
-                        $actions['delete'] = "<a class='submitdelete' title='" . esc_attr__( 'Delete this item permanently', 'bbpress' ) . "' href='" . esc_url( add_query_arg( array( '_wp_http_referer' => add_query_arg( array( 'post_type' => bbp_get_topic_post_type() ), admin_url( 'edit.php' ) ) ), get_delete_post_link( $topic->ID, '', true ) ) ) . "'>" . esc_html__( 'Delete Permanently', 'bbpress' ) . "</a>";
-                        unset( $actions['trash'] );
-                    }
-		}
+        $report_uri  = wp_nonce_url( add_query_arg( array( 'topic_id' => $topic->ID, 'action' => 'cne_ac_bbp_toggle_topic_report' ), remove_query_arg( array( 'bbp_topic_toggle_notice', 'topic_id', 'failed', 'super' ) ) ), 'report-topic_'  . $topic->ID );
+        if ( cne_ac_is_topic_reported( $topic->ID ) )
+            $actions['report'] = '<a href="' . esc_url( $report_uri ) . '" title="' . esc_attr__( 'Remover denúncia deste tópico', 'cne-ac' ) . '">' . esc_html__( 'Remover Denúncia', 'cne-ac' ) . '</a>';
+        else
+            $actions['report'] = '<a href="' . esc_url( $report_uri ) . '" title="' . esc_attr__( 'Denunciar este tópico', 'cne-ac' ) . '">' . esc_html__( 'Denunciar', 'cne-ac' ) . '</a>';
 
-		return $actions;
+    }
+
+    if ( current_user_can( 'delete_topic', $topic->ID ) ) {
+        if ( bbp_get_trash_status_id() === $topic->post_status ) {
+            unset( $actions['report'] );
         }
-        add_filter( 'post_row_actions', 'cne_ac_topic_row_actions', 999,  2 );
-        
-        function cne_ac_reply_row_actions( $actions, $reply ) {
 
-		if ( bbp_get_reply_post_type() != get_current_screen()->post_type ) 
-                    return $actions;
-                
-                unset( $actions['spam'] );
-
-		if ( current_user_can( 'moderate', $reply->ID ) ) {
-                    
-                        $report_uri  = wp_nonce_url( add_query_arg( array( 'reply_id' => $reply->ID, 'action' => 'cne_ac_bbp_toggle_reply_report' ), remove_query_arg( array( 'bbp_reply_toggle_notice', 'reply_id', 'failed', 'super' ) ) ), 'report-reply_'  . $reply->ID );
-			if ( cne_ac_is_reply_reported( $reply->ID ) )
-				$actions['report'] = '<a href="' . esc_url( $report_uri ) . '" title="' . esc_attr__( 'Remover denúncia deste comentário', 'cne-ac' ) . '">' . esc_html__( 'Remover Denúncia', 'cne-ac' ) . '</a>';
-                        else
-                            $actions['report'] = '<a href="' . esc_url( $report_uri ) . '" title="' . esc_attr__( 'Denunciar este comentário', 'cne-ac' ) . '">' . esc_html__( 'Denunciar', 'cne-ac' ) . '</a>';
-
-		}
-                
-                if ( current_user_can( 'delete_reply', $reply->ID ) ) {
-                    if ( bbp_get_trash_status_id() === $reply->post_status ) {
-                        unset( $actions['report'] );
-                    }
-
-                    if ( cne_ac_get_post_status_report() === $reply->post_status ) {
-                        $actions['delete'] = "<a class='submitdelete' title='" . esc_attr__( 'Delete this item permanently', 'bbpress' ) . "' href='" . esc_url( add_query_arg( array( '_wp_http_referer' => add_query_arg( array( 'post_type' => bbp_get_reply_post_type() ), admin_url( 'edit.php' ) ) ), get_delete_post_link( $reply->ID, '', true ) ) ) . "'>" . esc_html__( 'Delete Permanently', 'bbpress' ) . "</a>";
-                        unset( $actions['trash'] );
-                    }
-		}
-
-		return $actions;
+        if ( cne_ac_get_post_status_report() === $topic->post_status ) {
+            $actions['delete'] = "<a class='submitdelete' title='" . esc_attr__( 'Delete this item permanently', 'bbpress' ) . "' href='" . esc_url( add_query_arg( array( '_wp_http_referer' => add_query_arg( array( 'post_type' => bbp_get_topic_post_type() ), admin_url( 'edit.php' ) ) ), get_delete_post_link( $topic->ID, '', true ) ) ) . "'>" . esc_html__( 'Delete Permanently', 'bbpress' ) . "</a>";
+            unset( $actions['trash'] );
         }
-        add_filter( 'post_row_actions', 'cne_ac_reply_row_actions', 999,  2 );
+    }
+
+    return $actions;
+}
+add_filter( 'post_row_actions', 'cne_ac_topic_row_actions', 999,  2 );
         
-        function cne_ac_toggle_topic_report() {
+function cne_ac_reply_row_actions( $actions, $reply ) {
 
-            if ( bbp_get_topic_post_type() != get_current_screen()->post_type )
-                return;
+    if ( bbp_get_reply_post_type() != get_current_screen()->post_type ) 
+        return $actions;
 
-            if ( bbp_is_get_request() && !empty( $_GET['action'] ) && $_GET['action'] === 'cne_ac_bbp_toggle_topic_report' && !empty( $_GET['topic_id'] ) ) {
-                $topic_id  = (int) $_GET['topic_id'];    
-                $success   = false;                     
-                $topic     = bbp_get_topic( $topic_id );
+    unset( $actions['spam'] );
 
-                if ( empty( $topic ) )
-                        wp_die( __( 'The topic was not found!', 'bbpress' ) );
+    if ( current_user_can( 'moderate', $reply->ID ) ) {
 
-                if ( !current_user_can( 'moderate', $topic->ID ) )
-                        wp_die( __( 'You do not have the permission to do that!', 'bbpress' ) );
+        $report_uri  = wp_nonce_url( add_query_arg( array( 'reply_id' => $reply->ID, 'action' => 'cne_ac_bbp_toggle_reply_report' ), remove_query_arg( array( 'bbp_reply_toggle_notice', 'reply_id', 'failed', 'super' ) ) ), 'report-reply_'  . $reply->ID );
+        if ( cne_ac_is_reply_reported( $reply->ID ) )
+                $actions['report'] = '<a href="' . esc_url( $report_uri ) . '" title="' . esc_attr__( 'Remover denúncia deste comentário', 'cne-ac' ) . '">' . esc_html__( 'Remover Denúncia', 'cne-ac' ) . '</a>';
+        else
+            $actions['report'] = '<a href="' . esc_url( $report_uri ) . '" title="' . esc_attr__( 'Denunciar este comentário', 'cne-ac' ) . '">' . esc_html__( 'Denunciar', 'cne-ac' ) . '</a>';
 
-                check_admin_referer( 'report-topic_' . $topic_id );
+    }
 
-                $is_reported  = cne_ac_is_topic_reported( $topic_id );
-                $message      = true === $is_reported ? 'unreported' : 'reported';
-                $success      = true === $is_reported ? cne_ac_unreport_post( $topic ) : cne_ac_report_post( $topic );
-
-                
-                $message = array( 'bbp_topic_toggle_notice' => $message, 'topic_id' => $topic->ID );
-
-                if ( false === $success || is_wp_error( $success ) )
-                        $message['failed'] = '1';
-
-                $redirect = add_query_arg( $message, remove_query_arg( array( 'action', 'topic_id' ) ) );
-                wp_safe_redirect( $redirect );
-
-                exit();
-            }
-	}
-        add_action( 'load-edit.php', 'cne_ac_toggle_topic_report' );
-        
-        function cne_ac_toggle_reply_report() {
-
-            if ( bbp_get_reply_post_type() != get_current_screen()->post_type )
-                return;
-
-            if ( bbp_is_get_request() && !empty( $_GET['action'] ) && $_GET['action'] === 'cne_ac_bbp_toggle_reply_report' && !empty( $_GET['reply_id'] ) ) {
-                $reply_id  = (int) $_GET['reply_id'];    
-                $success   = false;                     
-                $reply     = bbp_get_reply( $reply_id );
-
-                if ( empty( $reply ) )
-                        wp_die( __( 'The reply was not found!', 'bbpress' ) );
-
-                if ( !current_user_can( 'moderate', $reply->ID ) )
-                        wp_die( __( 'You do not have the permission to do that!', 'bbpress' ) );
-
-                check_admin_referer( 'report-reply_' . $reply_id );
-
-                $is_reported  = cne_ac_is_reply_reported( $reply_id );
-                $message      = true === $is_reported ? 'unreported' : 'reported';
-                $success      = true === $is_reported ? cne_ac_unreport_post( $reply ) : cne_ac_report_post( $reply );
-
-                
-                $message = array( 'bbp_reply_toggle_notice' => $message, 'reply_id' => $reply->ID );
-
-                if ( false === $success || is_wp_error( $success ) )
-                        $message['failed'] = '1';
-
-                $redirect = add_query_arg( $message, remove_query_arg( array( 'action', 'reply_id' ) ) );
-                wp_safe_redirect( $redirect );
-
-                exit();
-            }
-	}
-        add_action( 'load-edit.php', 'cne_ac_toggle_reply_report' );
-        
-        function cne_ac_toggle_topic_notice() {
-
-            if ( bbp_get_topic_post_type() != get_current_screen()->post_type )
-                    return;
-
-            if ( bbp_is_get_request() && !empty( $_GET['bbp_topic_toggle_notice'] ) && in_array( $_GET['bbp_topic_toggle_notice'], array( 'unreported', 'reported' ) ) && !empty( $_GET['topic_id'] ) ) {
-                    $notice     = $_GET['bbp_topic_toggle_notice'];         // Which notice?
-                    $topic_id   = (int) $_GET['topic_id'];                  // What's the topic id?
-                    $is_failure = !empty( $_GET['failed'] ) ? true : false; // Was that a failure?
-                    
-                    if ( empty( $notice ) || empty( $topic_id ) )
-                            return;
-
-                    $topic = bbp_get_topic( $topic_id );
-                    if ( empty( $topic ) )
-                            return;
-
-                    $topic_title = bbp_get_topic_title( $topic->ID );
-
-                    switch ( $notice ) {
-                        case 'reported' :
-                            $message = $is_failure === true ? sprintf( __( 'Ocorreu um problema ao tentar denunciar o tópico "%1$s".',   'cne_ac' ), $topic_title ) : sprintf( __( 'Tópico "%1$s" denúnciado com sucesso.',   'cne_ac' ), $topic_title );
-                        break;
-                        case 'unreported'    :
-                            $message = $is_failure === true ? sprintf( __( 'Ocorreu um problema ao tentar remover denúncia do tópico "%1$s".', 'cne_ac' ), $topic_title ) : sprintf( __( 'Sucesso ao remover denúncia do tópico "%1$s".', 'cne_ac' ), $topic_title );
-                        break;
-                    }
-                    
-                    ?>
-
-                    <div id="message" class="<?php echo $is_failure === true ? 'error' : 'updated'; ?> fade">
-                            <p style="line-height: 150%"><?php echo esc_html( $message ); ?></p>
-                    </div>
-
-                    <?php
-            }
-	}
-        add_filter( 'admin_notices', 'cne_ac_toggle_topic_notice' );
-        
-        function cne_ac_reply_topic_notice() {
-
-            if ( bbp_get_reply_post_type() != get_current_screen()->post_type )
-                    return;
-
-            if ( bbp_is_get_request() && !empty( $_GET['bbp_reply_toggle_notice'] ) && in_array( $_GET['bbp_reply_toggle_notice'], array( 'unreported', 'reported' ) ) && !empty( $_GET['reply_id'] ) ) {
-                    $notice     = $_GET['bbp_reply_toggle_notice'];         // Which notice?
-                    $reply_id   = (int) $_GET['reply_id'];                  // What's the reply id?
-                    $is_failure = !empty( $_GET['failed'] ) ? true : false; // Was that a failure?
-                    
-                    if ( empty( $notice ) || empty( $reply_id ) )
-                            return;
-
-                    $reply = bbp_get_reply( $reply_id );
-                    if ( empty( $reply ) )
-                            return;
-
-                    $reply_title = bbp_get_reply_title( $reply->ID );
-
-                    switch ( $notice ) {
-                        case 'reported' :
-                            $message = $is_failure === true ? sprintf( __( 'Ocorreu um problema ao tentar denunciar a "%1$s".',   'cne_ac' ), $reply_title ) : sprintf( __( '"%1$s" denúnciado com sucesso.',   'cne_ac' ), $reply_title );
-                        break;
-                        case 'unreported'    :
-                            $message = $is_failure === true ? sprintf( __( 'Ocorreu um problema ao tentar remover denúncia da "%1$s".', 'cne_ac' ), $reply_title ) : sprintf( __( 'Sucesso ao remover denúncia da "%1$s".', 'cne_ac' ), $reply_title );
-                        break;
-                    }
-                    
-                    ?>
-
-                    <div id="message" class="<?php echo $is_failure === true ? 'error' : 'updated'; ?> fade">
-                            <p style="line-height: 150%"><?php echo esc_html( $message ); ?></p>
-                    </div>
-
-                    <?php
-            }
-	}
-        add_filter( 'admin_notices', 'cne_ac_reply_topic_notice' );
-        
-        function cne_ac_admin_topics_column_headers( $columns ) {
-
-            if ( !isset($_GET['post_status']) || $_GET['post_status'] != cne_ac_get_post_status_report() || get_current_screen()->post_type != bbp_get_topic_post_type() )
-                return $columns;
-
-		$columns['cne_ac_reported_by'] = __( 'Denunciado por', 'cne_ac' );
-
-		return $columns;
-	}
-        add_filter( 'bbp_admin_topics_column_headers',  'cne_ac_admin_topics_column_headers'  );
-        
-        function cne_ac_admin_replies_column_headers( $columns ) {
-
-            if ( !isset($_GET['post_status']) || $_GET['post_status'] != cne_ac_get_post_status_report() || get_current_screen()->post_type != bbp_get_reply_post_type() )
-                return $columns;
-
-		$columns['cne_ac_reported_by'] = __( 'Denunciado por', 'cne_ac' );
-
-		return $columns;
-	}
-        add_filter( 'bbp_admin_replies_column_headers',  'cne_ac_admin_replies_column_headers'  );
-        
-        function cne_ac_admin_topics_column_data( $column, $topic_id ) {
-
-		if ( !isset($_GET['post_status']) || $_GET['post_status'] != cne_ac_get_post_status_report() || get_current_screen()->post_type != bbp_get_topic_post_type() )
-                    return;
-
-		switch ( $column ) {
-			case 'cne_ac_reported_by':
-                            $user_id = get_post_meta( $topic_id, 'cne_ac_bbp_report_user_id', true );
-                            $data = cne_ac_get_data_col_report( $user_id );
-                            echo $data;
-                            break;
-		}
-	}
-        add_action( 'bbp_admin_topics_column_data', 'cne_ac_admin_topics_column_data', 10,  2 );
-        
-        function cne_ac_admin_replies_column_data( $column, $reply_id ) {
-
-		if ( !isset($_GET['post_status']) || $_GET['post_status'] != cne_ac_get_post_status_report() || get_current_screen()->post_type != bbp_get_reply_post_type() )
-                    return;
-
-		switch ( $column ) {
-			case 'cne_ac_reported_by':
-                            $user_id = get_post_meta( $reply_id, 'cne_ac_bbp_report_user_id', true );
-                            $data = cne_ac_get_data_col_report( $user_id );
-                            echo $data;
-                            break;
-		}
-	}
-        add_action( 'bbp_admin_replies_column_data', 'cne_ac_admin_replies_column_data', 10,  2 );
-        
-        function cne_ac_get_data_col_report( $user_id ) {
-            $data = __( 'Anônimo', 'cne_ac' );
-            $user = get_userdata( (int) $user_id );
-            
-            if( $user ) :
-                $username = $user->user_login;
-                $data = '<a class="cne-ac-col-report" href="' . admin_url( 'user-edit.php?user_id=' . intval($user_id) ) . '">' . esc_html( $username ) . '</a>';
-            endif;
-            
-            return $data;
-	}
-        
-        /* === DENUNCIAR FRONT  === */
-        function cne_ac_insert_report_status( $r ) {
-
-            if ( is_admin() || !bbp_get_view_all() )
-                return $r;
-
-            if ( ! isset( $r['post_status'] ) )
-                return $r;
-
-            $statuses = explode( ',', $r['post_status'] );
-
-            $statuses[] = cne_ac_get_post_status_report();
-
-            $r['post_status'] = implode( ',', $statuses );
-
-            return $r;
-	}
-        add_filter( 'bbp_after_has_topics_parse_args', 'cne_ac_insert_report_status' ); 
-        add_filter( 'bbp_after_has_replies_parse_args', 'cne_ac_insert_report_status' );
-        
-        function cne_ac_output_topic_notice() {
-            if ( !cne_ac_is_topic_reported( get_the_ID() ) )
-                return;
-
-            echo '<div class="alert alert-danger" role="alert">';
-                    echo '<p>';
-                            _e( 'ALERTA: Este tópico foi denunciado!', 'cne-ac' );
-                    echo '</p>';
-                    echo '<p>';
-                            _e( 'Nossa equipe irá avaliar o conteúdo do tópico e, caso confirmado que o conteúdo é inapropriado, esse será removido.', 'cne-ac' );
-                    echo '</p>';
-            echo '</div>';
-	}
-        add_action( 'bbp_template_before_single_topic', 'cne_ac_output_topic_notice' );  
-        
-       function cne_ac_output_reply_notice() {
-		$reply_id = get_the_ID();
-
-		// If post is a topic, return. (handled with 'output_topic_notice')
-		if ( bbp_is_topic( $reply_id ) ) {
-			return;
-		}
-
-		if ( ! cne_ac_is_topic_reported( $reply_id ) )
-			return;
-
-		echo '<div class="alert alert-danger" role="alert">';
-                    echo '<p>';
-                            _e( 'ALERTA: Este comentário foi denunciado!', 'cne-ac' );
-                    echo '</p>';
-                    echo '<p>';
-                            _e( 'Nossa equipe irá avaliar o conteúdo do comentário e, caso confirmado que o conteúdo é inapropriado, esse será removido.', 'cne-ac' );
-                    echo '</p>';
-            echo '</div>';
-	}
-        add_action( 'bbp_theme_after_reply_content', 'cne_ac_output_reply_notice' );
-        
-        function cne_ac_toggle_topic_handler( $action = '' ) {
-
-		// Bail if required GET actions aren't passed
-		if ( empty( $_GET['topic_id'] ) )
-			return;
-
-		// Setup possible get actions
-		$possible_actions = array(
-			'cne_ac_bbp_toggle_topic_report',
-			'cne_ac_bbp_toggle_topic_trash',
-		);
-
-		// Bail if actions aren't meant for this function
-		if ( !in_array( $action, $possible_actions ) )
-			return;
-
-		$failure   = '';                         // Empty failure string
-		$view_all  = false;                      // Assume not viewing all
-		$topic_id  = (int) $_GET['topic_id'];    // What's the topic id?
-		$success   = false;                      // Flag
-		$redirect  = '';                         // Empty redirect URL
-
-		// Make sure topic exists
-		$topic = bbp_get_topic( $topic_id );
-		if ( empty( $topic ) )
-			return;
-                
-                if( !is_user_logged_in() )
-                    return;
-                
-		if ( 'cne_ac_bbp_toggle_topic_trash' === $action && ( cne_ac_is_topic_reported( $topic->ID ) || ( !bbp_is_user_keymaster() && !current_user_can( 'trash_topics', $topic->ID ) ) ) ) {
-                    bbp_add_error( 'cne_ac_bbp_toggle_topic_permission', __( '<strong>ERRO:</strong> Não é possível excluir o tópico.', 'bbpress' ) );
-                    return;
-                }
-                
-                
-		
-                // What action are we trying to perform?
-		switch ( $action ) {
-
-			// Toggle reported
-			case 'cne_ac_bbp_toggle_topic_report' :
-				check_ajax_referer( 'report-topic_' . $topic_id );
-
-				$is_reported  = cne_ac_is_topic_reported( $topic_id );
-				$success  = true === $is_reported ? cne_ac_unreport_post( $topic ) : cne_ac_report_post( $topic );
-				$failure  = true === $is_reported ? __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar remover a denúncia deste tópico.', 'cne-ac' ) : __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar denunciar este tópico.', 'cne-ac' );
-				
-
-//                              $view_all = !$is_reported; // Only need this if we want to hide it, like spam
-
-				break;
-                    
-                    case 'cne_ac_bbp_toggle_topic_trash' :
-
-			$sub_action = !empty( $_GET['sub_action'] ) && in_array( $_GET['sub_action'], array( 'trash' ) ) ? $_GET['sub_action'] : false;
-
-			if ( empty( $sub_action ) )
-				break;
-
-			switch ( $sub_action ) {
-                            case 'trash':
-                                check_ajax_referer( 'trash-' . bbp_get_topic_post_type() . '_' . $topic_id );
-
-                                $view_all = true;
-                                $success  = wp_trash_post( $topic_id );
-                                $failure  = __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar excluir o tópico.', 'cne-ac' );
-
-                                break;
-			}
-
-			break;
-		}
-
-		// No errors
-		if ( false !== $success && !is_wp_error( $success ) ) {
-
-			// Redirect back to the topic's forum
-			if ( isset( $sub_action ) && ( 'trash' === $sub_action ) ) {
-                                $redirect = trailingslashit( bp_core_get_user_domain( bp_displayed_user_id() ) . bp_current_component() . '/' . bbp_get_topic_archive_slug() );
-
-			// Redirect back to the topic
-			} else {
-
-				// Get the redirect destination
-				$permalink = bbp_get_topic_permalink( $topic_id );
-				$redirect  = bbp_add_view_all( $permalink, $view_all );
-			}
-
-			wp_safe_redirect( $redirect );
-
-			// For good measure
-			exit();
-
-		// Handle errors
-		} else {
-			bbp_add_error( 'cne_ac_toggle_topic_handler', $failure );
-		}
-	}
-        add_action( 'bbp_get_request', 'cne_ac_toggle_topic_handler', 1 );
-        
-        function cne_ac_toggle_reply_handler( $action = '' ) {
-            
-		// Bail if required GET actions aren't passed
-		if ( empty( $_GET['reply_id'] ) )
-			return;
-
-		// Setup possible get actions
-		$possible_actions = array(
-			'cne_ac_bbp_toggle_reply_report',
-			'cne_ac_bbp_toggle_reply_trash',
-		);
-
-		// Bail if actions aren't meant for this function
-		if ( !in_array( $action, $possible_actions ) )
-			return;
-
-		$failure   = '';                         // Empty failure string
-		$view_all  = false;                      // Assume not viewing all
-		$reply_id  = (int) $_GET['reply_id'];    // What's the reply id?
-		$success   = false;                      // Flag
-		
-		// Make sure reply exists
-		$reply = bbp_get_reply( $reply_id );
-               
-		if ( empty( $reply ) )
-			return;
-
-		// Bail if non-logged-in user
-		if ( ! is_user_logged_in() )
-			return;
-                
-                if ( 'cne_ac_bbp_toggle_reply_trash' === $action && ( cne_ac_is_reply_reported( $reply->ID ) || ( !bbp_is_user_keymaster() && !current_user_can( 'trash_replies', $reply->ID ) ) ) ) {
-                    bbp_add_error( 'cne_ac_bbp_toggle_reply_permission', __( '<strong>ERRO:</strong> Não é possível excluir o comentário.', 'cne-ac' ) );
-                    return;
-                }
-
-		// What action are we trying to perform?
-		switch ( $action ) {
-
-			// Toggle reported
-			case 'cne_ac_bbp_toggle_reply_report' :
-                             
-				check_ajax_referer( 'report-reply_' . $reply_id );
-                            
-				$is_reported  = cne_ac_is_reply_reported( $reply_id );
-				$success  = true === $is_reported ? cne_ac_unreport_post( $reply ) : cne_ac_report_post( $reply );
-				$failure  = true === $is_reported ? __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar remover a denúncia deste comentário.', 'cne-ac' ) : __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar denunciar este comentário.', 'cne-ac' );
-				break;
-                        
-                        case 'cne_ac_bbp_toggle_reply_trash' :
-
-                            $sub_action = in_array( $_GET['sub_action'], array( 'trash' ) ) ? $_GET['sub_action'] : false;
-
-                            if ( empty( $sub_action ) )
-                                break;
-
-                            switch ( $sub_action ) {
-                                    case 'trash':
-                                            check_ajax_referer( 'trash-' . bbp_get_reply_post_type() . '_' . $reply_id );
-
-                                            $view_all = true;
-                                            $success  = wp_trash_post( $reply_id );
-                                            $failure  = __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar excluir o comentário.', 'cne-ac' );
-
-                                    break;
-                            }
-                }
-
-		// No errors
-		if ( ( false !== $success ) && !is_wp_error( $success ) ) {
-
-                    /** Redirect **********************************************************/
-                    
-                    if ( isset( $sub_action ) && ( 'trash' === $sub_action ) ) {
-                        $redirect = trailingslashit( bp_core_get_user_domain( bp_displayed_user_id() ) . bp_current_component() . '/' . bbp_get_reply_archive_slug() );
-                    } else {
-                        // Redirect to
-			$redirect_to = bbp_get_redirect_to();
-
-			// Get the reply URL
-			$redirect = bbp_get_reply_url( $reply_id, $redirect_to );
-
-			// Add view all if needed
-			if ( !empty( $view_all ) )
-				$redirect = bbp_add_view_all( $redirect, true );
-                    }
-			// Redirect back to reply
-			wp_safe_redirect( $redirect );
-
-			// For good measure
-			exit();
-
-		// Handle errors
-		} else {
-                    bbp_add_error( 'cne_ac_toggle_reply_handler', $failure );
-		}
-	}
-        add_action( 'bbp_get_request', 'cne_ac_toggle_reply_handler' );
-        
-        /* ========== FIM DENUNCIA ============= */
-        
-        /* nao foi feita a traducao da frase. Modificacao via filter para nao ter problemas com atualizacao do plugin */
-        function cne_ac_reply_pagination_count( $retstr ) {
-            if ( bbp_show_lead_topic() ) {
-                $search = array ( 'Viewing', 'reply', 'replies', 'through', 'of', 'total' );
-                $replace = array ( 'Visualizando', 'comentário', 'comentários', 'até', 'de', 'do total' );
-                $retstr = str_replace($search, $replace, $retstr);
-            }
-            
-            return $retstr;
-            
+    if ( current_user_can( 'delete_reply', $reply->ID ) ) {
+        if ( bbp_get_trash_status_id() === $reply->post_status ) {
+            unset( $actions['report'] );
         }
-        add_filter( 'bbp_get_topic_pagination_count', 'cne_ac_reply_pagination_count' );
-       //define( 'BP_FORUMS_SLUG', 'teste' );
-        
-                
 
-       
-        
+        if ( cne_ac_get_post_status_report() === $reply->post_status ) {
+            $actions['delete'] = "<a class='submitdelete' title='" . esc_attr__( 'Delete this item permanently', 'bbpress' ) . "' href='" . esc_url( add_query_arg( array( '_wp_http_referer' => add_query_arg( array( 'post_type' => bbp_get_reply_post_type() ), admin_url( 'edit.php' ) ) ), get_delete_post_link( $reply->ID, '', true ) ) ) . "'>" . esc_html__( 'Delete Permanently', 'bbpress' ) . "</a>";
+            unset( $actions['trash'] );
+        }
+    }
 
+    return $actions;
+}
+add_filter( 'post_row_actions', 'cne_ac_reply_row_actions', 999,  2 );
+        
+function cne_ac_toggle_topic_report() {
+
+    if ( bbp_get_topic_post_type() != get_current_screen()->post_type )
+        return;
+
+    if ( bbp_is_get_request() && !empty( $_GET['action'] ) && $_GET['action'] === 'cne_ac_bbp_toggle_topic_report' && !empty( $_GET['topic_id'] ) ) {
+        $topic_id  = (int) $_GET['topic_id'];    
+        $success   = false;                     
+        $topic     = bbp_get_topic( $topic_id );
+
+        if ( empty( $topic ) )
+            wp_die( __( 'The topic was not found!', 'bbpress' ) );
+
+        if ( !current_user_can( 'moderate', $topic->ID ) )
+            wp_die( __( 'You do not have the permission to do that!', 'bbpress' ) );
+
+        check_admin_referer( 'report-topic_' . $topic_id );
+
+        $is_reported  = cne_ac_is_topic_reported( $topic_id );
+        $message      = true === $is_reported ? 'unreported' : 'reported';
+        $success      = true === $is_reported ? cne_ac_unreport_post( $topic ) : cne_ac_report_post( $topic );
+
+
+        $message = array( 'bbp_topic_toggle_notice' => $message, 'topic_id' => $topic->ID );
+
+        if ( false === $success || is_wp_error( $success ) )
+            $message['failed'] = '1';
+
+        $redirect = add_query_arg( $message, remove_query_arg( array( 'action', 'topic_id' ) ) );
+        wp_safe_redirect( $redirect );
+
+        exit();
+    }
+}
+add_action( 'load-edit.php', 'cne_ac_toggle_topic_report' );
+        
+function cne_ac_toggle_reply_report() {
+
+    if ( bbp_get_reply_post_type() != get_current_screen()->post_type )
+        return;
+
+    if ( bbp_is_get_request() && !empty( $_GET['action'] ) && $_GET['action'] === 'cne_ac_bbp_toggle_reply_report' && !empty( $_GET['reply_id'] ) ) {
+        $reply_id  = (int) $_GET['reply_id'];    
+        $success   = false;                     
+        $reply     = bbp_get_reply( $reply_id );
+
+        if ( empty( $reply ) )
+            wp_die( __( 'The reply was not found!', 'bbpress' ) );
+
+        if ( !current_user_can( 'moderate', $reply->ID ) )
+            wp_die( __( 'You do not have the permission to do that!', 'bbpress' ) );
+
+        check_admin_referer( 'report-reply_' . $reply_id );
+
+        $is_reported  = cne_ac_is_reply_reported( $reply_id );
+        $message      = true === $is_reported ? 'unreported' : 'reported';
+        $success      = true === $is_reported ? cne_ac_unreport_post( $reply ) : cne_ac_report_post( $reply );
+
+
+        $message = array( 'bbp_reply_toggle_notice' => $message, 'reply_id' => $reply->ID );
+
+        if ( false === $success || is_wp_error( $success ) )
+            $message['failed'] = '1';
+
+        $redirect = add_query_arg( $message, remove_query_arg( array( 'action', 'reply_id' ) ) );
+        wp_safe_redirect( $redirect );
+
+        exit();
+    }
+}
+add_action( 'load-edit.php', 'cne_ac_toggle_reply_report' );
+        
+function cne_ac_toggle_topic_notice() {
+
+    if ( bbp_get_topic_post_type() != get_current_screen()->post_type )
+        return;
+
+    if ( bbp_is_get_request() && !empty( $_GET['bbp_topic_toggle_notice'] ) && in_array( $_GET['bbp_topic_toggle_notice'], array( 'unreported', 'reported' ) ) && !empty( $_GET['topic_id'] ) ) {
+        $notice     = $_GET['bbp_topic_toggle_notice'];         // Which notice?
+        $topic_id   = (int) $_GET['topic_id'];                  // What's the topic id?
+        $is_failure = !empty( $_GET['failed'] ) ? true : false; // Was that a failure?
+
+        if ( empty( $notice ) || empty( $topic_id ) )
+            return;
+
+        $topic = bbp_get_topic( $topic_id );
+        if ( empty( $topic ) )
+            return;
+
+        $topic_title = bbp_get_topic_title( $topic->ID );
+
+        switch ( $notice ) {
+            case 'reported' :
+                $message = $is_failure === true ? sprintf( __( 'Ocorreu um problema ao tentar denunciar o tópico "%1$s".',   'cne_ac' ), $topic_title ) : sprintf( __( 'Tópico "%1$s" denúnciado com sucesso.',   'cne_ac' ), $topic_title );
+            break;
+            case 'unreported'    :
+                $message = $is_failure === true ? sprintf( __( 'Ocorreu um problema ao tentar remover denúncia do tópico "%1$s".', 'cne_ac' ), $topic_title ) : sprintf( __( 'Sucesso ao remover denúncia do tópico "%1$s".', 'cne_ac' ), $topic_title );
+            break;
+        }
+
+        ?>
+
+        <div id="message" class="<?php echo $is_failure === true ? 'error' : 'updated'; ?> fade">
+            <p style="line-height: 150%"><?php echo esc_html( $message ); ?></p>
+        </div>
+
+        <?php
+    }
+}
+add_filter( 'admin_notices', 'cne_ac_toggle_topic_notice' );
+        
+function cne_ac_reply_topic_notice() {
+
+    if ( bbp_get_reply_post_type() != get_current_screen()->post_type )
+        return;
+
+    if ( bbp_is_get_request() && !empty( $_GET['bbp_reply_toggle_notice'] ) && in_array( $_GET['bbp_reply_toggle_notice'], array( 'unreported', 'reported' ) ) && !empty( $_GET['reply_id'] ) ) {
+        $notice     = $_GET['bbp_reply_toggle_notice'];         // Which notice?
+        $reply_id   = (int) $_GET['reply_id'];                  // What's the reply id?
+        $is_failure = !empty( $_GET['failed'] ) ? true : false; // Was that a failure?
+
+        if ( empty( $notice ) || empty( $reply_id ) )
+            return;
+
+        $reply = bbp_get_reply( $reply_id );
+        if ( empty( $reply ) )
+            return;
+
+        $reply_title = bbp_get_reply_title( $reply->ID );
+
+        switch ( $notice ) {
+            case 'reported' :
+                $message = $is_failure === true ? sprintf( __( 'Ocorreu um problema ao tentar denunciar a "%1$s".',   'cne_ac' ), $reply_title ) : sprintf( __( '"%1$s" denúnciado com sucesso.',   'cne_ac' ), $reply_title );
+            break;
+            case 'unreported'    :
+                $message = $is_failure === true ? sprintf( __( 'Ocorreu um problema ao tentar remover denúncia da "%1$s".', 'cne_ac' ), $reply_title ) : sprintf( __( 'Sucesso ao remover denúncia da "%1$s".', 'cne_ac' ), $reply_title );
+            break;
+        }
+
+        ?>
+
+        <div id="message" class="<?php echo $is_failure === true ? 'error' : 'updated'; ?> fade">
+            <p style="line-height: 150%"><?php echo esc_html( $message ); ?></p>
+        </div>
+
+        <?php
+    }
+}
+add_filter( 'admin_notices', 'cne_ac_reply_topic_notice' );
+        
+function cne_ac_admin_topics_column_headers( $columns ) {
+
+    if ( !isset($_GET['post_status']) || $_GET['post_status'] != cne_ac_get_post_status_report() || get_current_screen()->post_type != bbp_get_topic_post_type() )
+        return $columns;
+
+    $columns['cne_ac_reported_by'] = __( 'Denunciado por', 'cne_ac' );
+
+    return $columns;
+}
+add_filter( 'bbp_admin_topics_column_headers',  'cne_ac_admin_topics_column_headers'  );
+        
+function cne_ac_admin_replies_column_headers( $columns ) {
+
+    if ( !isset($_GET['post_status']) || $_GET['post_status'] != cne_ac_get_post_status_report() || get_current_screen()->post_type != bbp_get_reply_post_type() )
+        return $columns;
+
+    $columns['cne_ac_reported_by'] = __( 'Denunciado por', 'cne_ac' );
+
+    return $columns;
+}
+add_filter( 'bbp_admin_replies_column_headers',  'cne_ac_admin_replies_column_headers'  );
+        
+function cne_ac_admin_topics_column_data( $column, $topic_id ) {
+
+    if ( !isset($_GET['post_status']) || $_GET['post_status'] != cne_ac_get_post_status_report() || get_current_screen()->post_type != bbp_get_topic_post_type() )
+        return;
+
+    switch ( $column ) {
+        case 'cne_ac_reported_by':
+            $user_id = get_post_meta( $topic_id, 'cne_ac_bbp_report_user_id', true );
+            $data = cne_ac_get_data_col_report( $user_id );
+            echo $data;
+            break;
+    }
+}
+add_action( 'bbp_admin_topics_column_data', 'cne_ac_admin_topics_column_data', 10,  2 );
+        
+function cne_ac_admin_replies_column_data( $column, $reply_id ) {
+
+    if ( !isset($_GET['post_status']) || $_GET['post_status'] != cne_ac_get_post_status_report() || get_current_screen()->post_type != bbp_get_reply_post_type() )
+        return;
+
+    switch ( $column ) {
+        case 'cne_ac_reported_by':
+            $user_id = get_post_meta( $reply_id, 'cne_ac_bbp_report_user_id', true );
+            $data = cne_ac_get_data_col_report( $user_id );
+            echo $data;
+            break;
+    }
+}
+add_action( 'bbp_admin_replies_column_data', 'cne_ac_admin_replies_column_data', 10,  2 );
+        
+function cne_ac_get_data_col_report( $user_id ) {
+    $data = __( 'Anônimo', 'cne_ac' );
+    $user = get_userdata( (int) $user_id );
+
+    if( $user ) :
+        $username = $user->user_login;
+        $data = '<a class="cne-ac-col-report" href="' . admin_url( 'user-edit.php?user_id=' . intval($user_id) ) . '">' . esc_html( $username ) . '</a>';
+    endif;
+
+    return $data;
+}
+        
+/* === DENUNCIAR FRONT  === */
+function cne_ac_insert_report_status( $r ) {
+
+    if ( is_admin() || !bbp_get_view_all() )
+        return $r;
+
+    if ( ! isset( $r['post_status'] ) )
+        return $r;
+
+    $statuses = explode( ',', $r['post_status'] );
+
+    $statuses[] = cne_ac_get_post_status_report();
+
+    $r['post_status'] = implode( ',', $statuses );
+
+    return $r;
+}
+add_filter( 'bbp_after_has_topics_parse_args', 'cne_ac_insert_report_status' ); 
+add_filter( 'bbp_after_has_replies_parse_args', 'cne_ac_insert_report_status' );
+        
+function cne_ac_output_topic_notice() {
+    if ( !cne_ac_is_topic_reported( get_the_ID() ) )
+        return;
+
+    echo '<div class="alert alert-danger" role="alert">';
+        echo '<p>';
+            _e( 'ALERTA: Este tópico foi denunciado!', 'cne-ac' );
+        echo '</p>';
+        echo '<p>';
+            _e( 'Nossa equipe irá avaliar o conteúdo do tópico e, caso confirmado que o conteúdo é inapropriado, esse será removido.', 'cne-ac' );
+        echo '</p>';
+    echo '</div>';
+}
+add_action( 'bbp_template_before_single_topic', 'cne_ac_output_topic_notice' );  
+        
+function cne_ac_output_reply_notice() {
+    $reply_id = get_the_ID();
+
+    if ( bbp_is_topic( $reply_id ) ) {
+        return;
+    }
+
+    if ( ! cne_ac_is_topic_reported( $reply_id ) )
+        return;
+
+    echo '<div class="alert alert-danger" role="alert">';
+        echo '<p>';
+            _e( 'ALERTA: Este comentário foi denunciado!', 'cne-ac' );
+        echo '</p>';
+        echo '<p>';
+            _e( 'Nossa equipe irá avaliar o conteúdo do comentário e, caso confirmado que o conteúdo é inapropriado, esse será removido.', 'cne-ac' );
+        echo '</p>';
+    echo '</div>';
+}
+add_action( 'bbp_theme_after_reply_content', 'cne_ac_output_reply_notice' );
+        
+function cne_ac_toggle_topic_handler( $action = '' ) {
+
+    // Bail if required GET actions aren't passed
+    if ( empty( $_GET['topic_id'] ) )
+        return;
+
+    // Setup possible get actions
+    $possible_actions = array(
+            'cne_ac_bbp_toggle_topic_report',
+            'cne_ac_bbp_toggle_topic_trash',
+    );
+
+    // Bail if actions aren't meant for this function
+    if ( !in_array( $action, $possible_actions ) )
+        return;
+
+    $failure   = '';                         // Empty failure string
+    $view_all  = false;                      // Assume not viewing all
+    $topic_id  = (int) $_GET['topic_id'];    // What's the topic id?
+    $success   = false;                      // Flag
+    $redirect  = '';                         // Empty redirect URL
+
+    // Make sure topic exists
+    $topic = bbp_get_topic( $topic_id );
+    if ( empty( $topic ) )
+        return;
+
+    if( !is_user_logged_in() )
+        return;
+
+    if ( 'cne_ac_bbp_toggle_topic_trash' === $action && ( cne_ac_is_topic_reported( $topic->ID ) || ( !bbp_is_user_keymaster() && !current_user_can( 'trash_topics', $topic->ID ) ) ) ) {
+        bbp_add_error( 'cne_ac_bbp_toggle_topic_permission', __( '<strong>ERRO:</strong> Não é possível excluir o tópico.', 'bbpress' ) );
+        return;
+    }
+
+    // What action are we trying to perform?
+    switch ( $action ) {
+
+        // Toggle reported
+        case 'cne_ac_bbp_toggle_topic_report' :
+            check_ajax_referer( 'report-topic_' . $topic_id );
+
+            $is_reported  = cne_ac_is_topic_reported( $topic_id );
+            $success  = true === $is_reported ? cne_ac_unreport_post( $topic ) : cne_ac_report_post( $topic );
+            $failure  = true === $is_reported ? __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar remover a denúncia deste tópico.', 'cne-ac' ) : __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar denunciar este tópico.', 'cne-ac' );
+            break;
+
+        case 'cne_ac_bbp_toggle_topic_trash' :
+
+            $sub_action = !empty( $_GET['sub_action'] ) && in_array( $_GET['sub_action'], array( 'trash' ) ) ? $_GET['sub_action'] : false;
+
+            if ( empty( $sub_action ) )
+                break;
+
+            switch ( $sub_action ) {
+                case 'trash':
+                    check_ajax_referer( 'trash-' . bbp_get_topic_post_type() . '_' . $topic_id );
+
+                    $view_all = true;
+                    $success  = wp_trash_post( $topic_id );
+                    $failure  = __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar excluir o tópico.', 'cne-ac' );
+
+                    break;
+            }
+
+            break;
+    }
+
+    // No errors
+    if ( false !== $success && !is_wp_error( $success ) ) {
+
+        // Redirect back to the topic's forum
+        if ( isset( $sub_action ) && ( 'trash' === $sub_action ) ) {
+            $redirect = trailingslashit( bp_core_get_user_domain( bp_displayed_user_id() ) . bp_current_component() . '/' . bbp_get_topic_archive_slug() );
+
+        // Redirect back to the topic
+        } else {
+
+            // Get the redirect destination
+            $permalink = bbp_get_topic_permalink( $topic_id );
+            $redirect  = bbp_add_view_all( $permalink, $view_all );
+        }
+
+        wp_safe_redirect( $redirect );
+
+        // For good measure
+        exit();
+
+    // Handle errors
+    } else {
+        bbp_add_error( 'cne_ac_toggle_topic_handler', $failure );
+    }
+}
+add_action( 'bbp_get_request', 'cne_ac_toggle_topic_handler', 1 );
+        
+function cne_ac_toggle_reply_handler( $action = '' ) {
+
+    // Bail if required GET actions aren't passed
+    if ( empty( $_GET['reply_id'] ) )
+        return;
+
+    // Setup possible get actions
+    $possible_actions = array(
+            'cne_ac_bbp_toggle_reply_report',
+            'cne_ac_bbp_toggle_reply_trash',
+    );
+
+    // Bail if actions aren't meant for this function
+    if ( !in_array( $action, $possible_actions ) )
+        return;
+
+    $failure   = '';                         // Empty failure string
+    $view_all  = false;                      // Assume not viewing all
+    $reply_id  = (int) $_GET['reply_id'];    // What's the reply id?
+    $success   = false;                      // Flag
+
+    // Make sure reply exists
+    $reply = bbp_get_reply( $reply_id );
+
+    if ( empty( $reply ) )
+        return;
+
+    // Bail if non-logged-in user
+    if ( ! is_user_logged_in() )
+        return;
+
+    if ( 'cne_ac_bbp_toggle_reply_trash' === $action && ( cne_ac_is_reply_reported( $reply->ID ) || ( !bbp_is_user_keymaster() && !current_user_can( 'trash_replies', $reply->ID ) ) ) ) {
+        bbp_add_error( 'cne_ac_bbp_toggle_reply_permission', __( '<strong>ERRO:</strong> Não é possível excluir o comentário.', 'cne-ac' ) );
+        return;
+    }
+
+    // What action are we trying to perform?
+    switch ( $action ) {
+
+        // Toggle reported
+        case 'cne_ac_bbp_toggle_reply_report' :
+
+            check_ajax_referer( 'report-reply_' . $reply_id );
+
+            $is_reported  = cne_ac_is_reply_reported( $reply_id );
+            $success  = true === $is_reported ? cne_ac_unreport_post( $reply ) : cne_ac_report_post( $reply );
+            $failure  = true === $is_reported ? __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar remover a denúncia deste comentário.', 'cne-ac' ) : __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar denunciar este comentário.', 'cne-ac' );
+            break;
+
+        case 'cne_ac_bbp_toggle_reply_trash' :
+
+            $sub_action = in_array( $_GET['sub_action'], array( 'trash' ) ) ? $_GET['sub_action'] : false;
+
+            if ( empty( $sub_action ) )
+                break;
+
+            switch ( $sub_action ) {
+                    case 'trash':
+                        check_ajax_referer( 'trash-' . bbp_get_reply_post_type() . '_' . $reply_id );
+
+                        $view_all = true;
+                        $success  = wp_trash_post( $reply_id );
+                        $failure  = __( '<strong>ERRO</strong>: Ocorreu um problema ao tentar excluir o comentário.', 'cne-ac' );
+
+                    break;
+            }
+    }
+
+    // No errors
+    if ( ( false !== $success ) && !is_wp_error( $success ) ) {
+
+        /** Redirect **********************************************************/
+
+        if ( isset( $sub_action ) && ( 'trash' === $sub_action ) ) {
+            $redirect = trailingslashit( bp_core_get_user_domain( bp_displayed_user_id() ) . bp_current_component() . '/' . bbp_get_reply_archive_slug() );
+        } else {
+            // Redirect to
+            $redirect_to = bbp_get_redirect_to();
+
+            // Get the reply URL
+            $redirect = bbp_get_reply_url( $reply_id, $redirect_to );
+
+            // Add view all if needed
+            if ( !empty( $view_all ) )
+                $redirect = bbp_add_view_all( $redirect, true );
+        }
+        // Redirect back to reply
+        wp_safe_redirect( $redirect );
+
+        // For good measure
+        exit();
+
+    // Handle errors
+    } else {
+        bbp_add_error( 'cne_ac_toggle_reply_handler', $failure );
+    }
+}
+add_action( 'bbp_get_request', 'cne_ac_toggle_reply_handler' );
+/* === FIM DENUNCIAR CONTEUDO === */
+        
+        
+/**
+ * Nao foi feita a traducao da frase. Modificacao via filter para nao ter problemas com atualizacao do plugin 
+ */
+function cne_ac_reply_pagination_count( $retstr ) {
+    if ( bbp_show_lead_topic() ) {
+        $search = array ( 'Viewing', 'reply', 'replies', 'through', 'of', 'total' );
+        $replace = array ( 'Visualizando', 'comentário', 'comentários', 'até', 'de', 'do total' );
+        $retstr = str_replace($search, $replace, $retstr);
+    }
+
+    return $retstr;
+
+}
+add_filter( 'bbp_get_topic_pagination_count', 'cne_ac_reply_pagination_count' );
