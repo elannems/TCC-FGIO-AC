@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Search Loop - Single Forum
- *
- * @package bbPress
- * @subpackage Theme
+ * bbPress - Single Forum
  */
 
 ?>

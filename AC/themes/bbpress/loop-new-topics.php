@@ -1,7 +1,9 @@
 <?php
+
 /**
- * bbPress: Loop Topicos Recentes
+ * bbPress - New Topics Loop
  */
+
 ?>
 
 <div id="bbpress-forums">
@@ -9,7 +11,9 @@
     <?php do_action('bbp_template_before_topics_index'); ?>
 
     <?php $meta_key = 'cne_ac_secao_tipo'; ?>
+    
     <?php foreach (cne_ac_get_list_meta_values($meta_key) as $meta_value) : ?>
+    
         <?php if (bbp_has_forums(array('meta_key' => $meta_key, 'meta_value' => $meta_value))) : ?>
 
             <?php $list_forums_id = cne_ac_get_list_post_ids($meta_key, $meta_value, bbp_get_forum_post_type()); ?>
@@ -21,7 +25,7 @@
                         <?php do_action('bbp_theme_before_forum_title'); ?>
                         <h1><?php $meta_value == 'publico' ? _e('Veja o que outros fizeram', 'cne-ac') : _e('Últimas atividades adicionadas'); ?></h1>
                         <?php do_action('bbp_theme_after_forum_title'); ?>
-                    </div>
+                    </div> <!-- .cne-panel-heading -->
                     <div class="panel-body cne-panel-body">
                         <div class="cne-carousel">
 
@@ -38,27 +42,24 @@
 
                                             <div class="cne-thumbnail-top">
                                                 <h2><a class="bbp-topic-permalink" href="<?php bbp_topic_permalink(); ?>"><?php bbp_topic_title(); ?></a></h2>
-                                            </div> <!-- cne-thumbnail-top -->
+                                            </div> <!-- .cne-thumbnail-top -->
 
                                             <div class="cne-thumbnail-middle">
                                                 <span class="cne-bbp-topic-forum"> <a class="bbp-topic-permalink" href="<?php bbp_forum_permalink(bbp_get_topic_forum_id()); ?>"> <?php bbp_topic_forum_title(); ?> </a></span>     
                                                 <span class="bbp-topic-started-by"><?php printf(__('Criado por: %1$s', 'cne-ac'), bbp_get_topic_author_link(array('size' => '14', 'type' => 'name'))); ?></span>                                                                                     
-                                            </div> <!-- cne-thumbnail-middle -->
-                                        </div> <!-- cne-thumbnail-caption -->
-                                    </div> <!-- cne-thumbnail -->
-                                </div> <!-- col -->
+                                            </div> <!-- .cne-thumbnail-middle -->
+                                        
+                                        </div> <!-- .cne-thumbnail-caption -->
+                                    </div> <!-- .cne-thumbnail -->
+                                </div> <!-- .col -->
 
                             <?php endwhile; ?>
 
-                        </div> <!-- cne-carousel -->
-                    </div> <!-- cne-panel-body -->
-                </div> <!-- cne-panel -->
+                        </div> <!-- .cne-carousel -->
+                    </div> <!-- .cne-panel-body -->
+                </div> <!-- .cne-panel -->
+                
             <?php endif; ?>
-
-
-
-
-
 
         <?php else : ?>
 
@@ -70,4 +71,4 @@
 
     <?php do_action('bbp_template_after_topics_index'); ?>
 
-</div>
+</div> <!-- #bbpress-forums -->

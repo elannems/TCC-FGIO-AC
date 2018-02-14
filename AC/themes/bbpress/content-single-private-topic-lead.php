@@ -1,10 +1,9 @@
 <?php
+
 /**
- * Single Topic Lead Content Part
- *
- * @package bbPress
- * @subpackage Theme
+ * bbPress - Single Private Topic Lead Content Part
  */
+
 ?>
 
 <?php do_action('bbp_template_before_lead_topic'); ?>
@@ -48,46 +47,25 @@
             </tbody>
         </table>
         <?php do_action('cne_bbp_theme_after_lead_topic_header'); ?>            
-    </div>
+    </div> <!-- .cne-bbp-topic-header -->
 
     <div class="cne-bbp-topic-body">
 
-        <!--<div class="bbp-topic-header">
-
-                <div class="bbp-meta">
-
-                        <span class="bbp-topic-post-date"><?php bbp_topic_post_date(); ?></span>
-
-                        <a href="<?php bbp_topic_permalink(); ?>" class="bbp-topic-permalink">#<?php bbp_topic_id(); ?></a>
-
-<?php do_action('bbp_theme_before_topic_admin_links'); ?>
-
-        <?php bbp_topic_admin_links(); ?>
-
-        <?php do_action('bbp_theme_after_topic_admin_links'); ?>
-
-                </div>--><!-- .bbp-meta -->
-
-        <!--</div>--><!-- .bbp-topic-header -->
-
         <div id="post-<?php bbp_topic_id(); ?>" <?php bbp_topic_class(); ?>>
-
 
             <div class="cne-bbp-topic-content">
 
-<?php do_action('bbp_theme_before_topic_content'); ?>
+                <?php do_action('bbp_theme_before_topic_content'); ?>
 
                 <?php bbp_topic_content(); ?>
 
                 <?php do_action('bbp_theme_after_topic_content'); ?>
 
-            </div><!-- .bbp-topic-content -->
+            </div> <!-- .cne-bbp-topic-content -->
 
-        </div><!-- #post-<?php bbp_topic_id(); ?> -->
+        </div> <!-- #post-<?php bbp_topic_id(); ?> -->
 
-
-
-    </div><!-- .bbp-body -->
+    </div> <!-- .cne-bbp-topic-body -->
 
     <div class="cne-bbp-topic-footer col-xs-12">
         <div class="row">
@@ -97,9 +75,9 @@
             <div class="col-xs-6 col-xs-offset-3 cne-share">
                 <?php cne_ac_get_topic_share_link(); ?>
             </div>
-        </div>
-    </div>
+        </div> <!-- .row -->
+    </div> <!-- .cne-bbp-topic-footer -->
 
-</div><!-- #bbp-topic-<?php bbp_topic_id(); ?>-lead -->
+</div> <!-- #bbp-topic-<?php bbp_topic_id(); ?>-lead -->
 
 <?php do_action('bbp_template_after_lead_topic'); ?>

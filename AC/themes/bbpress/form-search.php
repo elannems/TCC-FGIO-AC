@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Search 
- *
- * @package bbPress
- * @subpackage Theme
+ * bbPress - Search
  */
 
 ?>
@@ -15,8 +12,8 @@
         <label class="screen-reader-text hidden" for="bbp_search"><?php _e( 'Search for:', 'bbpress' ); ?></label>
         <input type="hidden" name="action" value="bbp-search-request" />
         <input tabindex="<?php bbp_tab_index(); ?>" type="text" value="<?php echo esc_attr( bbp_get_search_terms() ); ?>" name="bbp_search" class="form-control" />
-    </div> <!-- form-group -->
+    </div> <!-- .form-group -->
     
     <button tabindex="<?php bbp_tab_index(); ?>" class="btn btn-default" type="submit" id="bbp_search_submit"><?php esc_attr_e( 'Pesquisar', 'cne-ac' ); ?></button>
 
-</form> <!-- form-inline -->
+</form> <!-- .form-inline -->

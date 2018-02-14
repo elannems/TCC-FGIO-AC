@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Search Content Part
- *
- * @package bbPress
- * @subpackage Theme
+ * bbPress - Search Content Part
  */
 
 ?>
@@ -21,13 +18,13 @@
 
 		 <?php bbp_get_template_part( 'pagination', 'search' ); ?>
 
-		 <?php bbp_get_template_part( 'loop',       'search' ); ?>
+		 <?php bbp_get_template_part( 'loop', 'search' ); ?>
 
 		 <?php bbp_get_template_part( 'pagination', 'search' ); ?>
 
 	<?php elseif ( bbp_get_search_terms() ) : ?>
 
-		 <?php bbp_get_template_part( 'feedback',   'no-search' ); ?>
+		 <?php bbp_get_template_part( 'feedback', 'no-search' ); ?>
 
 	<?php else : ?>
 
@@ -37,5 +34,5 @@
 
 	<?php do_action( 'bbp_template_after_search_results' ); ?>
 
-</div>
+</div> <!-- #bbpress-forums -->
 

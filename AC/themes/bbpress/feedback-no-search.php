@@ -1,14 +1,11 @@
 <?php
 
 /**
- * No Search Results Feedback Part
- *
- * @package bbPress
- * @subpackage Theme
+ * bbPress - No Search Results Feedback Part
  */
 
 ?>
 
 <div class="alert alert-warning">
-	<p><?php _e( 'Nenhum resultado encontrado para a pesquisa solicitada!', 'cne-ac' ); ?></p>
+    <p><?php _e( 'Nenhum resultado encontrado para a pesquisa solicitada!', 'cne-ac' ); ?></p>
 </div>
