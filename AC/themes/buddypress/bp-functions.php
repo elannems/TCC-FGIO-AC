@@ -17,7 +17,7 @@ add_action( 'admin_bar_menu', 'cne_ac_remove_bp_admin_bar' );
 
 
 /**
- * Remove o meta box bp_group_settings pois nao sera utilizada o recurso de privacidade dos grupos
+ * Remove o meta box bp_group_settings pois nao sera utilizado o recurso de privacidade dos grupos
  */
 function cne_ac_remove_groups_meta_box() {
     remove_meta_box( 'bp_group_settings' , get_current_screen()->id , 'side' ); 
@@ -25,32 +25,35 @@ function cne_ac_remove_groups_meta_box() {
 add_action( 'bp_groups_admin_load' , 'cne_ac_remove_groups_meta_box' );
 
 /**
- * Add um novo meta box para o post type groups sem o recurso de privacidade
+ * Add um novo meta box de configuracao para o post type groups sem o recurso de privacidade
  */
 function cne_ac_add_groups_meta_box() {
     add_meta_box( 'cne_ac_bp_group_settings', __( 'Configurações', 'cne-ac' ), 'cne_ac_bp_groups_admin_edit_metabox_settings', get_current_screen()->id, 'side', 'core' );
 }
 add_action( 'bp_groups_admin_load' , 'cne_ac_add_groups_meta_box' );
 
+/**
+ * Meta box de configuracao do post type groups sem o recurso de privacidade
+ */
 function cne_ac_bp_groups_admin_edit_metabox_settings( $item ) {
 
     $invite_status = bp_group_get_invite_status( $item->id ); ?>
 
     <div class="bp-groups-settings-section" id="bp-groups-settings-section-invite-status">
         <fieldset>
-                <legend><?php _e( 'Quem pode convidar outras pessoas para o grupo?', 'cne-ac' ); ?></legend>
+            <legend><?php _e( 'Quem pode convidar outras pessoas para o grupo?', 'cne-ac' ); ?></legend>
 
-                <label for="bp-group-invite-status-members"><input type="radio" name="group-invite-status" id="bp-group-invite-status-members" value="members" <?php checked( $invite_status, 'members' ) ?> /><?php _e( 'Todos os usuários do grupo', 'cne-ac' ) ?></label>
-                <label for="bp-group-invite-status-mods"><input type="radio" name="group-invite-status" id="bp-group-invite-status-mods" value="mods" <?php checked( $invite_status, 'mods' ) ?> /><?php _e( 'Somente os administradores e moderadores do grupo', 'cne-ac' ) ?></label>
-                <label for="bp-group-invite-status-admins"><input type="radio" name="group-invite-status" id="bp-group-invite-status-admins" value="admins" <?php checked( $invite_status, 'admins' ) ?> /><?php _e( 'Somente os administradores do grupo', 'cne-ac' ) ?></label>
+            <label for="bp-group-invite-status-members"><input type="radio" name="group-invite-status" id="bp-group-invite-status-members" value="members" <?php checked( $invite_status, 'members' ) ?> /><?php _e( 'Todos os usuários do grupo', 'cne-ac' ) ?></label>
+            <label for="bp-group-invite-status-mods"><input type="radio" name="group-invite-status" id="bp-group-invite-status-mods" value="mods" <?php checked( $invite_status, 'mods' ) ?> /><?php _e( 'Somente os administradores e moderadores do grupo', 'cne-ac' ) ?></label>
+            <label for="bp-group-invite-status-admins"><input type="radio" name="group-invite-status" id="bp-group-invite-status-admins" value="admins" <?php checked( $invite_status, 'admins' ) ?> /><?php _e( 'Somente os administradores do grupo', 'cne-ac' ) ?></label>
         </fieldset>
     </div>
 
 <?php
 }
 
-/*
- * Modifica as colunas exibidas na area de admin dos grupos do wordpress
+/**
+ * Modifica as colunas da grid do post type groups na area de admin do wordpress
  */
 function cne_ac_bp_groups_list_table_get_columns( $columns ) {
     $columns = array(
@@ -65,7 +68,7 @@ function cne_ac_bp_groups_list_table_get_columns( $columns ) {
 }
 add_filter( 'bp_groups_list_table_get_columns', 'cne_ac_bp_groups_list_table_get_columns' );
 
-/*
+/**
  * Altera o html do search_form para usar o bootstrap
  */
 function cne_ac_change_search_form() {
@@ -92,27 +95,22 @@ function cne_ac_change_search_form() {
 }
 add_filter( 'bp_directory_members_search_form', 'cne_ac_change_search_form' );
  
-/*
-function cnew_ac_args_create_button( $button_args ) {
-    $button_args['link_class'] = $button_args['link_class'] . ' btn btn-default';
-    
-    return $button_args;
-    
-}
-add_filter( 'bp_get_group_create_button', 'cnew_ac_args_create_button' );
- * 
- */
-    
+/**
+ * Retorna a quantidade de usuarios em um grupo
+ */    
 function cne_ac_member_count_change( $count_string ) {
 
     $count = preg_replace("/[^0-9]/","",$count_string);
 
-    $count_string = sprintf( __( 'Usuários: %s', 'cne_ac' ), bp_core_number_format( $count ) );
+    $count_string = sprintf( __( 'Usuários: %s', 'cne-ac' ), bp_core_number_format( $count ) );
 
     return $count_string;
 }
 add_filter( 'bp_get_group_member_count', 'cne_ac_member_count_change' );
 
+/**
+ * Altera as palavras especificadas sempre que aparecerem, pois se alterar no arquivo de traducao o mesmo pode ser perdido com a atualizacao dos plugins
+ */
 function cne_ac_text_change( $text ){
     $search = array( 'membro','membros','of' );
     $replace = array( 'usuário','usuários','de' );
@@ -123,6 +121,9 @@ function cne_ac_text_change( $text ){
 add_filter('bp_get_search_default_text', 'cne_ac_text_change');
 add_filter( 'bp_members_pagination_count', 'cne_ac_text_change' );
 
+/**
+ * Retorna a quantidade de amigos de um usuario
+ */ 
 function cne_ac_get_total_user_friends() {
     global $members_template;
     
@@ -135,7 +136,7 @@ function cne_ac_get_total_user_friends() {
     return $friend_count;
 }
 
-/* 
+/** 
  * Funcao baseada na funcao bp_groups_front_template_part() para chamar a funcao cne_ac_groups_members_template em
  * vez da funcao bp_groups_members_template_part() e remover o template do activity 
  */
@@ -156,21 +157,21 @@ function cne_ac_groups_front_template_part() {
     return $located;
 }
 
-/*
+/**
  * Funcao baseada na funcao bp_groups_members_template_part() para alterar o template
  */
 function cne_ac_groups_members_template_part() { ?>
     <div class="item-list-tabs" id="subnav" aria-label="<?php esc_attr_e( 'Group secondary navigation', 'buddypress' ); ?>" role="navigation">
         <div class="form-inline">
-        <ul>
-            <?php cne_ac_groups_members_filter(); ?>
-            <?php do_action( 'bp_members_directory_member_sub_types' ); ?>
-            
-            <li class="groups-members-search" role="search">
-                <?php bp_directory_members_search_form(); ?>
-            </li>
+            <ul>
+                <?php cne_ac_groups_members_filter(); ?>
+                <?php do_action( 'bp_members_directory_member_sub_types' ); ?>
 
-        </ul>
+                <li class="groups-members-search" role="search">
+                    <?php bp_directory_members_search_form(); ?>
+                </li>
+
+            </ul>
         </div>
     </div>
 
@@ -184,38 +185,36 @@ function cne_ac_groups_members_template_part() { ?>
 <?php
 }
 
-/*
+/**
  * Funcao baseada na funcao bp_groups_members_filter() para alterar o template
  */
-function cne_ac_groups_members_filter() {
-	?>
-	<li id="group_members-order-select" class="last filter">
-            
-                <div class="form-group">
-		<label for="group_members-order-by"><?php _e( 'Order By:', 'buddypress' ); ?></label>
-		<select id="group_members-order-by" class="form-control">
-			<option value="last_joined"><?php _e( 'Newest', 'buddypress' ); ?></option>
-			<option value="first_joined"><?php _e( 'Oldest', 'buddypress' ); ?></option>
+function cne_ac_groups_members_filter() { ?>
+    <li id="group_members-order-select" class="last filter">
 
-			<?php if ( bp_is_active( 'activity' ) ) : ?>
-				<option value="group_activity"><?php _e( 'Group Activity', 'buddypress' ); ?></option>
-			<?php endif; ?>
+        <div class="form-group">
+            <label for="group_members-order-by"><?php _e( 'Order By:', 'buddypress' ); ?></label>
+            <select id="group_members-order-by" class="form-control">
+                <option value="last_joined"><?php _e( 'Newest', 'buddypress' ); ?></option>
+                <option value="first_joined"><?php _e( 'Oldest', 'buddypress' ); ?></option>
 
-			<option value="alphabetical"><?php _e( 'Alphabetical', 'buddypress' ); ?></option>
+                <?php if ( bp_is_active( 'activity' ) ) : ?>
+                        <option value="group_activity"><?php _e( 'Group Activity', 'buddypress' ); ?></option>
+                <?php endif; ?>
 
-			<?php do_action( 'bp_groups_members_order_options' ); ?>
-                
-		</select>
-                </div>
-	</li>
-	<?php
+                <option value="alphabetical"><?php _e( 'Alphabetical', 'buddypress' ); ?></option>
+
+                <?php do_action( 'bp_groups_members_order_options' ); ?>
+
+            </select>
+        </div>
+        
+    </li>
+<?php
 }
 
-/*
+/**
  * Selecione apenas os componentes que serao utilizados do buddypress
  */
-
-
 function cne_ac_core_get_components ( $components, $type ) {
     $required_components = array(
                 'xprofile' => array(
@@ -265,12 +264,6 @@ add_filter( 'bp_core_get_components', 'cne_ac_core_get_components', 10, 2 );
 
 add_filter( 'bp_ignore_deprecated', '__return_true' );
 
-function cne_ac_remove_menus_bp() {
-	//remove_submenu_page( 'options-general.php', 'bp-components' );
-
-}
-add_action( 'admin_menu', 'cne_ac_remove_menus_bp', 999 );
-
 function cne_ac_bp_core_render_message_content( $message, $type ) {
     switch( $type ) {
         case 'updated' :
@@ -288,9 +281,11 @@ add_filter( 'bp_core_render_message_content', 'cne_ac_bp_core_render_message_con
 
 function cne_ac_nav_change_avatar( $html, $subnav_item, $selected_item ) {
     $selected = '';
+    
     if ( $subnav_item->slug === $selected_item ) {
         $selected = ' class="current selected"';
     }
+    
     $list_type = bp_is_group() ? 'groups' : 'personal';
     $subnav_item->name = __( 'Alterar avatar', 'cne-ac' );
     
@@ -301,9 +296,11 @@ add_filter( 'bp_get_options_nav_change-avatar', 'cne_ac_nav_change_avatar', 10, 
 
 function cne_ac_nav_change_replies( $html, $subnav_item, $selected_item ) {
     $selected = '';
+    
     if ( $subnav_item->slug === $selected_item ) {
         $selected = ' class="current selected"';
     }
+    
     $subnav_item->name = __( 'Comentários', 'cne-ac' );
     
     return '<li id="' . esc_attr( $subnav_item->css_id . '-personal-li' ) . '" ' . $selected . '><a id="' . esc_attr( $subnav_item->css_id ) . '" href="' . esc_url( $subnav_item->link ) . '">' . $subnav_item->name . '</a></li>';
@@ -315,6 +312,7 @@ function cne_ac_nav_change_forums( $html, $user_nav_item ) {
     
     $user_nav_item->name = __( 'Colaboração', 'cnew' );
     $selected = '';
+    
     if ( bp_is_current_component( $user_nav_item->slug ) ) {
         $selected = ' class="current selected"';
     }
@@ -363,11 +361,11 @@ function cne_ac_add_subnav_item_profile() {
     $parent_slug = 'profile';
     
     if ( bp_displayed_user_domain() ) {
-            $user_domain = bp_displayed_user_domain();
+        $user_domain = bp_displayed_user_domain();
     } elseif ( bp_loggedin_user_domain() ) {
-            $user_domain = bp_loggedin_user_domain();
+        $user_domain = bp_loggedin_user_domain();
     } else {
-            return;
+        return;
     }
 
     $settings_link = trailingslashit( $user_domain . $parent_slug );
@@ -392,32 +390,34 @@ function cne_ac_add_subnav_item_profile() {
                 'position'              => 90,
                 'user_has_access'       => !is_super_admin( bp_displayed_user_id() )
         ) );
-    }
-    
+    }   
 }
 add_action( 'bp_setup_nav', 'cne_ac_add_subnav_item_profile', 100 );
 
 function cne_ac_bp_profile_screen_delete_account() {
 
-	if ( bp_action_variables() ) {
-		bp_do_404();
-		return;
-	}
+    if ( bp_action_variables() ) {
+        bp_do_404();
+        return;
+    }
 
-	bp_core_load_template( apply_filters( 'cne_ac_bp_profile_screen_delete_account', 'members/single/profile/delete-account' ) );
+    bp_core_load_template( apply_filters( 'cne_ac_bp_profile_screen_delete_account', 'members/single/profile/delete-account' ) );
 }
 
 function cne_ac_bp_profile_screen_general() {
 
-	if ( bp_action_variables() ) {
-		bp_do_404();
-		return;
-	}
+    if ( bp_action_variables() ) {
+        bp_do_404();
+        return;
+    }
 
-	bp_core_load_template( apply_filters( 'cne_ac_bp_profile_screen_general', 'members/single/profile/general' ) );
+    bp_core_load_template( apply_filters( 'cne_ac_bp_profile_screen_general', 'members/single/profile/general' ) );
+    
 }
 
-//altera a funcao bp_settings_action_delete_account para considerar a acao delete_account no profile em vez de em settings
+/**
+ * Altera a funcao bp_settings_action_delete_account para considerar a acao delete_account no profile em vez de em settings
+ */
 function cne_ac_bp_profile_action_delete_account() {
 
     if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
@@ -441,7 +441,6 @@ function cne_ac_bp_profile_action_delete_account() {
     check_admin_referer( 'delete-account' );
 
     if ( bp_core_delete_account( bp_displayed_user_id() ) ) {
-
         bp_core_add_message( __( 'Usuário excluído com sucesso.', 'cne-ac' ), 'success' );
         $link = bp_get_members_directory_permalink();
         bp_core_redirect( $link );
@@ -449,7 +448,9 @@ function cne_ac_bp_profile_action_delete_account() {
 }
 add_action( 'bp_actions', 'cne_ac_bp_profile_action_delete_account' );
 
-//altera a funcao bp_settings_action_general para considerar a acao general no profile em vez de em settings
+/**
+ * Altera a funcao bp_settings_action_general para considerar a acao general no profile em vez de em settings
+ */
 function cne_ac_bp_profile_action_general() {
 
     if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
@@ -490,13 +491,14 @@ function cne_ac_bp_profile_action_general() {
                 } else {
                     $pass_error = 'same';
                 }
+                
             } else {
                     $pass_error = 'mismatch';
             }
         } elseif ( empty( $_POST['pass1'] ) && empty( $_POST['pass2'] ) ) {
-                $pass_error = false;
+            $pass_error = false;
         } elseif ( ( empty( $_POST['pass1'] ) && !empty( $_POST['pass2'] ) ) || ( !empty( $_POST['pass1'] ) && empty( $_POST['pass2'] ) ) ) {
-                $pass_error = 'empty';
+            $pass_error = 'empty';
         }
 
         if ( isset( $update_user->data ) && is_object( $update_user->data ) ) {
@@ -551,7 +553,9 @@ function cne_ac_bp_profile_action_general() {
 }
 add_action( 'bp_actions', 'cne_ac_bp_profile_action_general' );
 
-/* Baseado em: <https://wordpress.stackexchange.com/questions/142517/remove-ability-to-access-certain-admin-menus>*/
+/**
+ * Baseado em: <https://wordpress.stackexchange.com/questions/142517/remove-ability-to-access-certain-admin-menus>
+ */
 function cne_ac_restrict_bp_admin_pages() {
     
     $author = wp_get_current_user();
@@ -614,12 +618,12 @@ add_action( 'current_screen', 'cne_ac_restrict_bp_admin_pages' );
 
 function remove_menus(){
   
-    remove_menu_page( 'edit.php?post_type=bp-email' );  //E-mail BP
+    remove_menu_page( 'edit.php?post_type=bp-email' ); //E-mail BP
     remove_submenu_page( 'tools.php', 'bp-tools' ); //Ferramentas BP
     remove_submenu_page( 'tools.php', 'bbp-repair' ); //Ferramentas BBP
-    remove_submenu_page( 'options-general.php', 'bp-components' );        //Configuracoes BP
-    remove_submenu_page( 'options-general.php', 'bbpress' );        //Configuracoes BBP
-    remove_submenu_page( 'users.php', 'bp-profile-setup' );        //Campos de perfil BP
+    remove_submenu_page( 'options-general.php', 'bp-components' ); //Configuracoes BP
+    remove_submenu_page( 'options-general.php', 'bbpress' ); //Configuracoes BBP
+    remove_submenu_page( 'users.php', 'bp-profile-setup' ); //Campos de perfil BP
     remove_submenu_page('themes.php', 'bp-emails-customizer-redirect'); //E-mail BP em Aparência
     
     $author = wp_get_current_user();
@@ -637,13 +641,9 @@ function remove_menus(){
     }
     
     if($role_site == 'subscriber') {
-        remove_menu_page( 'edit-comments.php' );          //Comments
-        remove_menu_page( 'edit.php' );          //posts
+        remove_menu_page( 'edit-comments.php' ); //Comments
+        remove_menu_page( 'edit.php' ); //Posts
     }
   
 }
 add_action( 'admin_menu', 'remove_menus' );
-
-
-
-
