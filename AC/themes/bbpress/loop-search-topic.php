@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Search Loop - Single Topic
- *
- * @package bbPress
- * @subpackage Theme
+ * bbPress - Search Loop: Single Topic
  */
 
 ?>
@@ -26,13 +23,14 @@
     </div><!-- .cne-bbp-search-result -->
 
     <div class="cne-bbp-search-author col-xs-3">
+        
         <div class="bbp-topic-author">
 
-		<?php do_action( 'bbp_theme_before_topic_author_details' ); ?>
-    
-		<?php bbp_topic_author_link( array( 'type' => 'name' ) ); ?>
+            <?php do_action( 'bbp_theme_before_topic_author_details' ); ?>
 
-		<?php do_action( 'bbp_theme_after_topic_author_details' ); ?>
+            <?php bbp_topic_author_link( array( 'type' => 'name' ) ); ?>
+
+            <?php do_action( 'bbp_theme_after_topic_author_details' ); ?>
 
 	</div><!-- .bbp-topic-author -->
 

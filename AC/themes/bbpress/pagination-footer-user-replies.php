@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Pagination for pages of replies (when viewing a topic)
- *
- * @package bbPress
- * @subpackage Theme
+ * bbPress - Pagination for pages of replies (when viewing a topic)
  */
 
 ?>
@@ -13,13 +10,13 @@
 
 <div class="bbp-pagination footer">
 
-	<div class="bbp-pagination-links">
+    <div class="bbp-pagination-links">
 
-		<?php bbp_topic_pagination_links(); ?>
+        <?php bbp_topic_pagination_links(); ?>
 
-	</div>
+    </div> <!-- .bbp-pagination-links -->
     
-</div>
+</div> <!-- .bbp-pagination footer -->
 
 
 <?php do_action( 'bbp_template_after_pagination_loop' ); ?>

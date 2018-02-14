@@ -1,7 +1,7 @@
 <?php
 
 /**
- * bbPress - Single Forum
+ * bbPress - Search Loop: Single Forum
  */
 
 ?>
