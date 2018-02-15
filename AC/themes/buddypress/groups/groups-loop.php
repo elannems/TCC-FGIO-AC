@@ -1,9 +1,7 @@
 <?php
+
 /**
  * BuddyPress - Groups Loop
- *
- * @package cne-ac
- * 
  */
 
 ?>
@@ -13,7 +11,7 @@
 do_action( 'bp_before_groups_loop' ); ?>
 
 <?php if ( bp_get_current_group_directory_type() ) : ?>
-	<p class="current-group-type"><?php bp_current_group_directory_type_message() ?></p>
+    <p class="current-group-type"><?php bp_current_group_directory_type_message() ?></p>
 <?php endif; ?>
 
 <?php if ( bp_has_groups( bp_ajax_querystring( 'groups' ) . '&per_page=5' ) ) : ?>
@@ -32,11 +30,9 @@ do_action( 'bp_before_groups_loop' ); ?>
 
         </div>
 
-    </div>
+    </div> <!-- .pagination -->
 
-    <?php
-
-    do_action( 'bp_before_directory_groups_list' ); ?>
+    <?php do_action( 'bp_before_directory_groups_list' ); ?>
 
     <ul id="groups-list" class="item-list" aria-live="assertive" aria-atomic="true" aria-relevant="all">
 
@@ -46,23 +42,23 @@ do_action( 'bp_before_groups_loop' ); ?>
                     <div class="col-xs-8">
                         <div class="item-avatar pull-left">
                             <a href="<?php bp_group_permalink(); ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ); ?></a>
-                        </div>
+                        </div> <!-- .item-avatar -->
 
                         <div class="item pull-left">
                             <div class="item-title"><h2><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2></div>
                             <div class="item-meta"><?php _e('Membros: ', 'cne-ac') . bp_group_total_members(); ?></div>
                             <div class="item-meta"><span class="activity" data-livestamp="<?php bp_core_iso8601_date( bp_get_group_last_active( 0, array( 'relative' => true ) ) ); ?>"><?php printf( __( 'active %s', 'buddypress' ), bp_get_group_last_active() ); ?></span></div>
 
-                        <?php do_action( 'bp_directory_groups_item' ); ?>
+                            <?php do_action( 'bp_directory_groups_item' ); ?>
 
-                        </div>
-                    </div>
+                        </div> <!-- .item -->
+                    </div> <!-- .col -->
 
                     <div class="action col-xs-4">
 
                         <?php do_action( 'bp_directory_groups_actions' ); ?>
 
-                    </div>
+                    </div> <!-- .action -->
 
                 </div> <!-- .row -->
                         
@@ -78,7 +74,7 @@ do_action( 'bp_before_groups_loop' ); ?>
             
 	<?php endwhile; ?>
 
-    </ul>
+    </ul> <!-- #groups-list -->
 
     <?php do_action( 'bp_after_directory_groups_list' ); ?>
 
@@ -90,16 +86,14 @@ do_action( 'bp_before_groups_loop' ); ?>
 
         </div>
 
-    </div>
+    </div> <!-- .pagination -->
 
 <?php else: ?>
 
-	<div id="message" class="info alert alert-info">
-		<p><?php _e( 'There were no groups found.', 'buddypress' ); ?></p>
-	</div>
+    <div id="message" class="info alert alert-info">
+            <p><?php _e( 'There were no groups found.', 'buddypress' ); ?></p>
+    </div>
 
 <?php endif; ?>
 
-<?php
-
-do_action( 'bp_after_groups_loop' ); ?>
+<?php do_action( 'bp_after_groups_loop' ); ?>

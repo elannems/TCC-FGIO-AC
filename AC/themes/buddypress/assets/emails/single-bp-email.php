@@ -1,15 +1,7 @@
 <?php
+
 /**
- * BuddyPress email template.
- *
- * Magic numbers:
- *  1.618 = golden mean.
- *  1.35  = default body_text_size multipler. Gives default heading of 20px.
- *
- * @since 2.5.0
- *
- * @package BuddyPress
- * @subpackage Core
+ * BuddyPress - Email template
  */
 
 /*

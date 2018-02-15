@@ -1,10 +1,9 @@
 <?php
+
 /**
  * BuddyPress - Groups
- *
- * @package cne-ac
- * 
  */
+
 do_action('bp_before_directory_groups_page');
 ?>
 
@@ -14,17 +13,15 @@ do_action('bp_before_directory_groups_page');
 
     <?php do_action('bp_before_directory_groups_content'); ?>
 
-
     <?php bp_get_template_part('common/search/dir-search-form'); ?>
-
 
     <form action="" method="post" id="groups-directory-form" class="dir-form">
 
         <div id="template-notices" role="alert" aria-atomic="true">
             
-        <?php do_action('template_notices'); ?>
+            <?php do_action('template_notices'); ?>
 
-        </div>
+        </div> <!-- #template-notices -->
 
         <div class="item-list-tabs" id="cne-filter-buttons" aria-label="<?php esc_attr_e('Groups directory main navigation', 'buddypress'); ?>">
             <ul>
@@ -37,13 +34,13 @@ do_action('bp_before_directory_groups_page');
                 <?php do_action('bp_groups_directory_group_filter'); ?>
 
             </ul>
-        </div><!-- .item-list-tabs -->
+        </div> <!-- .item-list-tabs -->
 
         <div class="item-list-tabs" id="subnav" aria-label="<?php esc_attr_e('Groups directory secondary navigation', 'buddypress'); ?>" role="navigation">
             <div class="form-inline">
                 <div class="form-group">
                     <ul>
-                    <?php do_action('bp_groups_directory_group_types'); ?>
+                        <?php do_action('bp_groups_directory_group_types'); ?>
 
                         <li id="groups-order-select" class="last filter">
 
@@ -57,11 +54,11 @@ do_action('bp_before_directory_groups_page');
 
                                 <?php do_action('bp_groups_directory_order_options'); ?>
                             </select>
-                        </li>
+                        </li> <!-- #groups-order-select -->
                     </ul>
-                </div>
-            </div>
-        </div>
+                </div> <!-- .form-group -->
+            </div> <!-- .form-inline -->
+        </div> <!-- .item-list-tabs -->
         
         <h2 class="bp-screen-reader-text sr-only"><?php _e( 'Groups directory', 'buddypress' ); ?></h2>
 
@@ -69,25 +66,17 @@ do_action('bp_before_directory_groups_page');
             <?php bp_get_template_part('groups/groups-loop'); ?>
         </div><!-- #groups-dir-list -->
 
-        <?php
-        do_action('bp_directory_groups_content');
-        ?>
+        <?php do_action('bp_directory_groups_content'); ?>
 
         <?php wp_nonce_field('directory_groups', '_wpnonce-groups-filter'); ?>
 
-        <?php
-        do_action('bp_after_directory_groups_content');
-        ?>
+        <?php do_action('bp_after_directory_groups_content'); ?>
 
-    </form><!-- #groups-directory-form -->
+    </form> <!-- #groups-directory-form -->
 
-        <?php
-        do_action('bp_after_directory_groups');
-        ?>
+    <?php do_action('bp_after_directory_groups'); ?>
 
-</div><!-- #buddypress -->
+</div> <!-- #buddypress -->
 
-<?php
-do_action('bp_after_directory_groups_page');
-
+<?php do_action('bp_after_directory_groups_page');
     
