@@ -1,17 +1,15 @@
 <?php
+
 /**
  * BuddyPress - Group Invites Loop
- *
- * @package cne-ac
- * 
  */
 
 ?>
 <div class="left-menu col-xs-4">
     
     <div id="message" class="info alert alert-info">
-			<p><?php _e( 'AVISO: É necessário acionar o botão "Enviar Convites" para efetivar o envio dos convites.', 'cne-ac' ); ?></p>
-		</div>
+        <p><?php _e( 'AVISO: É necessário acionar o botão "Enviar Convites" para efetivar o envio dos convites.', 'cne-ac' ); ?></p>
+    </div>
 
     <div id="invite-list">
 
@@ -21,90 +19,87 @@
 
         <?php wp_nonce_field( 'groups_invite_uninvite_user', '_wpnonce_invite_uninvite_user' ); ?>
 
-    </div>
+    </div> <!-- #invite-list -->
 
-</div><!-- .left-menu -->
+</div> <!-- .left-menu -->
 
 <div class="main-column col-xs-8">
 
-	<?php do_action( 'bp_before_group_send_invites_list' ); ?>
+    <?php do_action( 'bp_before_group_send_invites_list' ); ?>
 
-	<?php if ( bp_group_has_invites( bp_ajax_querystring( 'invite' ) . '&per_page=5' ) ) : ?>
+    <?php if ( bp_group_has_invites( bp_ajax_querystring( 'invite' ) . '&per_page=5' ) ) : ?>
 
-		<div id="pag-top" class="pagination">
+        <div id="pag-top" class="pagination">
 
-			<div class="pag-count" id="group-invite-count-top">
+            <div class="pag-count" id="group-invite-count-top">
 
-				<?php bp_group_invite_pagination_count(); ?>
+                <?php bp_group_invite_pagination_count(); ?>
 
-			</div>
+            </div>
 
-			<div class="pagination-links" id="group-invite-pag-top">
+            <div class="pagination-links" id="group-invite-pag-top">
 
-				<?php bp_group_invite_pagination_links(); ?>
+                <?php bp_group_invite_pagination_links(); ?>
 
-			</div>
+            </div>
 
-		</div>
+        </div> <!-- #pag-top -->
 
-		<ul id="friend-list" class="item-list">
+        <ul id="friend-list" class="item-list">
 
-		<?php while ( bp_group_invites() ) : bp_group_the_invite(); ?>
+            <?php while ( bp_group_invites() ) : bp_group_the_invite(); ?>
 
-			<li id="<?php bp_group_invite_item_id(); ?>">
-                            <div class="row">
-				
-                                
-                                <div class="item col-xs-7">
-                                    <div class="item-title">
-                                        <h2><?php bp_group_invite_user_link(); ?></h2>
-                                    </div>
-                                    <div class="item-meta"><span class="activity"><?php bp_group_invite_user_last_active(); ?></span></div>
-                                    <?php do_action( 'bp_group_send_invites_item' ); ?>
-                                </div>
+                <li id="<?php bp_group_invite_item_id(); ?>">
+                    <div class="row">
 
-
-				
-
-				<div class="action col-xs-5">
-					<a class="button remove" href="<?php bp_group_invite_user_remove_invite_url(); ?>" id="<?php bp_group_invite_item_id(); ?>"><?php _e( 'Remove Invite', 'buddypress' ); ?></a>
-
-					<?php do_action( 'bp_group_send_invites_item_action' ); ?>
-				</div>
+                        <div class="item col-xs-7">
+                            <div class="item-title">
+                                <h2><?php bp_group_invite_user_link(); ?></h2>
                             </div>
-			</li>
-                        
-                
+                            <div class="item-meta">
+                                <span class="activity"><?php bp_group_invite_user_last_active(); ?></span>
+                            </div>
+                            <?php do_action( 'bp_group_send_invites_item' ); ?>
+                        </div> <!-- .item -->
 
-		<?php endwhile; ?>
+                        <div class="action col-xs-5">
+                            <a class="button remove" href="<?php bp_group_invite_user_remove_invite_url(); ?>" id="<?php bp_group_invite_item_id(); ?>"><?php _e( 'Remove Invite', 'buddypress' ); ?></a>
 
-		</ul><!-- #friend-list -->
+                            <?php do_action( 'bp_group_send_invites_item_action' ); ?>
+                        </div> <!-- .action -->
 
-		<div id="pag-bottom" class="pagination">
+                    </div> <!-- .row -->
+                </li>
 
-			<div class="pagination-links" id="group-invite-pag-bottom">
+            <?php endwhile; ?>
 
-				<?php bp_group_invite_pagination_links(); ?>
+        </ul> <!-- #friend-list -->
 
-			</div>
+        <div id="pag-bottom" class="pagination">
 
-		</div>
+            <div class="pagination-links" id="group-invite-pag-bottom">
 
-	<?php else : ?>
+                <?php bp_group_invite_pagination_links(); ?>
 
-		<div id="message" class="info alert alert-info">
-			<p><?php _e( 'Selecione seus amigos que deseja convidar para o grupo.', 'cne-ac' ); ?></p>
-		</div>
+            </div>
 
-	<?php endif; ?>
+        </div> <!-- #pag-bottom -->
 
-<?php
+    <?php else : ?>
 
-/**
- * Fires after the display of the group send invites list.
- *
- * @since 1.1.0
- */
-do_action( 'bp_after_group_send_invites_list' ); ?>
+        <div id="message" class="info alert alert-info">
+            <p><?php _e( 'Selecione seus amigos que deseja convidar para o grupo.', 'cne-ac' ); ?></p>
+        </div>
 
-</div><!-- .main-column -->
+    <?php endif; ?>
+
+    <?php
+
+    /**
+     * Fires after the display of the group send invites list.
+     *
+     * @since 1.1.0
+     */
+    do_action( 'bp_after_group_send_invites_list' ); ?>
+
+</div> <!-- .main-column -->

@@ -1,9 +1,7 @@
 <?php
+
 /**
  * BuddyPress - Groups Admin - Edit Details
- *
- * @package cne-ac
- * 
  */
 
 ?>
@@ -16,6 +14,7 @@
     <label for="group-name"><?php _e( 'Nome do Grupo (obrigatório)', 'cne-ac' ); ?></label>
     <input type="text" name="group-name" id="group-name" value="<?php bp_group_name(); ?>" aria-required="true" class="form-control" />
 </div>
+
 <div class="form-group">
     <label for="group-desc"><?php _e( 'Descrição do Grupo (obrigatório)', 'cne-ac' ); ?></label>
     <textarea name="group-desc" id="group-desc" aria-required="true" class="form-control" rows="5"><?php bp_group_description_editable(); ?></textarea>
@@ -25,6 +24,6 @@
 
 <?php do_action( 'bp_after_group_details_admin' ); ?>
 
-<input type="submit" value="<?php esc_attr_e( 'Salvar Alterações', 'buddypress' ); ?>" id="save" name="save" class="btn btn-success pull-right" />
+<input type="submit" value="<?php esc_attr_e( 'Salvar Alterações', 'cne-ac' ); ?>" id="save" name="save" class="btn btn-success pull-right" />
 
 <?php wp_nonce_field( 'groups_edit_group_details' ); ?>

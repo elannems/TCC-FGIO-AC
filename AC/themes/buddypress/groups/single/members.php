@@ -1,9 +1,7 @@
 <?php
+
 /**
  * BuddyPress - Groups Members
- *
- * @package cne-ac
- * 
  */
 
 ?>
@@ -26,27 +24,30 @@
 
         </div>
 
-    </div>
+    </div> <!-- #pag-top -->
 
     <?php do_action( 'bp_before_group_members_list' ); ?>
 
     <ul id="member-list" class="item-list">
 
         <?php while ( bp_group_members() ) : bp_group_the_member(); ?>
+        
             <li>
                 <div class="row">
                     <div class="col-xs-8">
-                    <div class="item-avatar pull-left">
-                        <a href="<?php bp_group_member_domain(); ?>"><?php bp_group_member_avatar_mini(); ?></a>
-                    </div>
+                        <div class="item-avatar pull-left">
+                            <a href="<?php bp_group_member_domain(); ?>"><?php bp_group_member_avatar_mini(); ?></a>
+                        </div> <!-- .item-avatar -->
 
-                    <div class="item pull-left">
-                        <div class="item-title">
-                            <h2><?php bp_group_member_link(); ?></h2>
-                        </div>
-                        <div class="item-meta"><span class="activity" data-livestamp="<?php bp_core_iso8601_date( bp_get_group_member_joined_since( array( 'relative' => false ) ) ); ?>"><?php bp_group_member_joined_since(); ?></span></div>
-                    </div>
-                    </div>
+                        <div class="item pull-left">
+                            <div class="item-title">
+                                <h2><?php bp_group_member_link(); ?></h2>
+                            </div>
+                            <div class="item-meta">
+                                <span class="activity" data-livestamp="<?php bp_core_iso8601_date( bp_get_group_member_joined_since( array( 'relative' => false ) ) ); ?>"><?php bp_group_member_joined_since(); ?></span>
+                            </div>
+                        </div> <!-- .item -->
+                    </div> <!-- .col -->
 		
                     <?php do_action( 'bp_group_members_list_item' ); ?>
 
@@ -58,15 +59,15 @@
 
                             <?php do_action( 'bp_group_members_list_item_action' ); ?>
 
-                        </div>
+                        </div> <!-- .action -->
 
                     <?php endif; ?>
-                </div>
+                </div> <!-- .row -->
             </li>
 
         <?php endwhile; ?>
 
-    </ul>
+    </ul> <!-- .item-list -->
 
     <?php do_action( 'bp_after_group_members_list' ); ?>
 
@@ -78,14 +79,14 @@
 
         </div>
 
-    </div>
+    </div> <!-- #pag-bottom -->
 
     <?php do_action( 'bp_after_group_members_content' ); ?>
 
 <?php else: ?>
 
-	<div id="message" class="info alert alert-info">
-		<p><?php _e( 'No members were found.', 'buddypress' ); ?></p>
-	</div>
+    <div id="message" class="info alert alert-info">
+            <p><?php _e( 'No members were found.', 'buddypress' ); ?></p>
+    </div>
 
 <?php endif; ?>

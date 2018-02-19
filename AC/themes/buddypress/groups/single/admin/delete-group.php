@@ -1,8 +1,7 @@
 <?php
+
 /**
  * BuddyPress - Groups Admin - Delete Group
- *
- * @package cne-ac
  */
 
 ?>
@@ -12,7 +11,7 @@
 <?php do_action( 'bp_before_group_delete_admin' ); ?>
 
 <div id="message" class="alert alert-info">
-	<p><?php _e( 'CUIDADO: Ao excluir um grupo não é possível reverter esta ação.', 'cne-ac' ); ?></p>
+    <p><?php _e( 'CUIDADO: Ao excluir um grupo não é possível reverter esta ação.', 'cne-ac' ); ?></p>
 </div>
 
 <div class="checkbox">
@@ -22,7 +21,7 @@
 <?php do_action( 'bp_after_group_delete_admin' ); ?>
 
 <div class="submit">
-	<input type="submit" disabled="disabled" value="<?php esc_attr_e( 'Excluir Grupo', 'cne-ac' ); ?>" id="delete-group-button" name="delete-group-button" class="btn btn-danger pull-right" />
+    <input type="submit" disabled="disabled" value="<?php esc_attr_e( 'Excluir Grupo', 'cne-ac' ); ?>" id="delete-group-button" name="delete-group-button" class="btn btn-danger pull-right" />
 </div>
 
 <?php wp_nonce_field( 'groups_delete_group' ); ?>

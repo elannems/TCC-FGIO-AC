@@ -1,9 +1,7 @@
 <?php
+
 /**
  * BuddyPress - Groups Home
- *
- * @package cne-ac
- * 
  */
 
 ?>
@@ -13,23 +11,17 @@
         
         while ( bp_groups() ) : bp_the_group(); ?>
 
-        <?php
+            <?php do_action( 'bp_before_group_home_content' ); ?>
 
-        do_action( 'bp_before_group_home_content' ); ?>
+            <div id="item-header" role="complementary">
 
-        <div id="item-header" role="complementary">
+                <?php bp_get_template_part( 'groups/single/group-header' ); ?>
 
-        <?php
+            </div><!-- #item-header -->
 
-            bp_get_template_part( 'groups/single/group-header' );
+            <div id="item-content" class="row">
 
-        ?>
-
-        </div><!-- #item-header -->
-
-        <div id="item-content" class="row">
-            
-            <div id="item-nav" class="col-xs-3">
+                <div id="item-nav" class="col-xs-3">
                     <div class="item-list-tabs no-ajax" id="object-nav" aria-label="<?php esc_attr_e( 'Group primary navigation', 'buddypress' ); ?>" role="navigation">
                         <ul class="nav">
 
@@ -38,56 +30,56 @@
                             <?php do_action( 'bp_group_options_nav' ); ?>
 
                         </ul>
-                    </div>
-            </div><!-- #item-nav -->
-            
+                    </div> <!-- .item-list-tabs -->
+                </div> <!-- #item-nav -->
 
-            <div id="item-body" class="col-xs-9">
 
-                <?php
+                <div id="item-body" class="col-xs-9">
 
-                do_action( 'bp_before_group_body' );
+                    <?php
 
-                if ( bp_is_group_home() ) :
+                    do_action( 'bp_before_group_body' );
 
-                    if ( bp_group_is_visible() ) {
+                    if ( bp_is_group_home() ) :
 
-                        cne_ac_groups_front_template_part();
+                        if ( bp_group_is_visible() ) {
 
-                    } else {
+                            cne_ac_groups_front_template_part();
 
-                        do_action( 'bp_before_group_status_message' ); ?>
+                        } else {
 
-                        <div id="message" class="info alert alert-info">
-                            <p><?php bp_group_status_message(); ?></p>
-                        </div>
+                            do_action( 'bp_before_group_status_message' ); ?>
 
-                        <?php do_action( 'bp_after_group_status_message' );
+                            <div id="message" class="info alert alert-info">
+                                <p><?php bp_group_status_message(); ?></p>
+                            </div>
 
-                    }
+                            <?php do_action( 'bp_after_group_status_message' );
 
-                else :
+                        }
 
-                    if ( bp_is_group_admin_page() ) : 
-                        bp_get_template_part( 'groups/single/admin' );
-                    elseif ( bp_is_group_members() ) : 
-                        cne_ac_groups_members_template_part();
-                    elseif ( bp_is_group_invites() ) : 
-                        bp_get_template_part( 'groups/single/send-invites' );
-                    elseif ( bp_is_group_membership_request() ) : 
-                        bp_get_template_part( 'groups/single/request-membership' );                                
-                    else : 
-                        bp_get_template_part( 'groups/single/plugins' );
+                    else :
+
+                        if ( bp_is_group_admin_page() ) : 
+                            bp_get_template_part( 'groups/single/admin' );
+                        elseif ( bp_is_group_members() ) : 
+                            cne_ac_groups_members_template_part();
+                        elseif ( bp_is_group_invites() ) : 
+                            bp_get_template_part( 'groups/single/send-invites' );
+                        elseif ( bp_is_group_membership_request() ) : 
+                            bp_get_template_part( 'groups/single/request-membership' );                                
+                        else : 
+                            bp_get_template_part( 'groups/single/plugins' );
+                        endif;
+
                     endif;
 
-                endif;
 
+                    do_action( 'bp_after_group_body' ); ?>
 
-                do_action( 'bp_after_group_body' ); ?>
+                </div> <!-- #item-body -->
 
-            </div><!-- #item-body -->
-            
-            </div>
+            </div> <!-- .row -->
 
             <?php do_action( 'bp_after_group_home_content' ); ?>
 
@@ -99,4 +91,4 @@
     
     ?>
 
-</div><!-- #buddypress -->
+</div> <!-- #buddypress -->
