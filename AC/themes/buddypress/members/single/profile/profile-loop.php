@@ -1,9 +1,7 @@
 <?php
+
 /**
- * BuddyPress - Members Profile Loop
- *
- * @package cne-ac
- * 
+ * BuddyPress - Perfil: Informacoes do Usuario 
  */
 
 do_action( 'bp_before_profile_loop_content' ); ?>
@@ -23,6 +21,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
                 <h2 class="cne-title"><?php bp_the_profile_group_name(); ?></h2>
 
                 <table class="profile-fields table">
+                    
                     <?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
                         <?php if ( bp_field_has_data() ) : ?>
@@ -34,23 +33,20 @@ do_action( 'bp_before_profile_loop_content' ); ?>
                                 <td><?php bp_the_profile_field_value(); ?></td>
 
                             </tr>
-                            <?php endif; ?>
+                        <?php endif; ?>                            
 
+                        <?php do_action( 'bp_profile_field_item' ); ?>
 
+                    <?php endwhile; ?>
                             
+                    <tr>
+                        <th ><?php _e( 'Usuário desde', 'cne-ac' ); ?></th>
 
-                                <?php do_action( 'bp_profile_field_item' ); ?>
+                        <td><?php echo $ud->user_registered ? date( "d/m/Y", strtotime( $ud->user_registered ) ) : ''; ?></td>
+                    </tr>
+                </table> <!-- .profile-fields -->
 
-                        <?php endwhile; ?>
-                            
-                        <tr>
-                            <th ><?php _e( 'Usuário desde', 'cne-ac' ); ?></th>
-
-                            <td><?php echo $ud->user_registered ? date( "d/m/Y", strtotime( $ud->user_registered ) ) : ''; ?></td>
-                        </tr>
-                </table>
-
-            </div>
+            </div> <!-- .bp-widget -->
 
             <?php do_action( 'bp_after_profile_field_content' ); ?>
 
@@ -62,5 +58,4 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 
 <?php endif; ?>
 
-<?php
-do_action( 'bp_after_profile_loop_content' ); ?>
+<?php do_action( 'bp_after_profile_loop_content' ); ?>

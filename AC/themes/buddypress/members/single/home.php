@@ -1,91 +1,89 @@
 <?php
+
 /**
  * BuddyPress - Members Home
- *
- * @package cne-ac
- * 
  */
 
 ?>
 
 <div id="buddypress">
 
-	<?php do_action( 'bp_before_member_home_content' ); ?>
+    <?php do_action( 'bp_before_member_home_content' ); ?>
 
-	<div id="item-header" role="complementary">
+    <div id="item-header" role="complementary">
 
-		<?php	bp_get_template_part( 'members/single/member-header' ); 	?>
+            <?php	bp_get_template_part( 'members/single/member-header' ); 	?>
 
-	</div><!-- #item-header -->
-        <div id="item-content" class="row">
-            
-            <div id="item-nav" class="col-xs-3">
-                <div class="item-list-tabs no-ajax" id="object-nav" aria-label="<?php esc_attr_e( 'Member primary navigation', 'buddypress' ); ?>" role="navigation">
-                    <ul class="nav">
+    </div> <!-- #item-header -->
+    <div id="item-content" class="row">
 
-                        <?php bp_get_displayed_user_nav(); ?>
+        <div id="item-nav" class="col-xs-3">
+            <div class="item-list-tabs no-ajax" id="object-nav" aria-label="<?php esc_attr_e( 'Member primary navigation', 'buddypress' ); ?>" role="navigation">
+                <ul class="nav">
 
-                        <?php do_action( 'bp_member_options_nav' ); ?>
+                    <?php bp_get_displayed_user_nav(); ?>
 
-                    </ul>
-                </div>
-            </div><!-- #item-nav -->
+                    <?php do_action( 'bp_member_options_nav' ); ?>
 
-            <div id="item-body" class="col-xs-9">
+                </ul>
+            </div> <!-- #object-nav -->
+        </div> <!-- #item-nav -->
 
-                    <?php
+        <div id="item-body" class="col-xs-9">
 
-                    do_action( 'bp_before_member_body' );
+            <?php
 
-                    if ( bp_is_user_front() ) :
-                            bp_displayed_user_front_template_part();
+            do_action( 'bp_before_member_body' );
 
-                    elseif ( bp_is_user_activity() ) :
-                            bp_get_template_part( 'members/single/activity' );
+            if ( bp_is_user_front() ) :
+                bp_displayed_user_front_template_part();
 
-                    elseif ( bp_is_user_blogs() ) :
-                            bp_get_template_part( 'members/single/blogs'    );
+            elseif ( bp_is_user_activity() ) :
+                bp_get_template_part( 'members/single/activity' );
 
-                    elseif ( bp_is_user_friends() ) :
-                            bp_get_template_part( 'members/single/friends'  );
+            elseif ( bp_is_user_blogs() ) :
+                bp_get_template_part( 'members/single/blogs'    );
 
-                    elseif ( bp_is_user_groups() ) :
-                            bp_get_template_part( 'members/single/groups'   );
+            elseif ( bp_is_user_friends() ) :
+                bp_get_template_part( 'members/single/friends'  );
 
-                    elseif ( bp_is_user_messages() ) :
-                            bp_get_template_part( 'members/single/messages' );
+            elseif ( bp_is_user_groups() ) :
+                bp_get_template_part( 'members/single/groups'   );
 
-                    elseif ( bp_is_user_profile() ) :
-                            bp_get_template_part( 'members/single/profile'  );
+            elseif ( bp_is_user_messages() ) :
+                bp_get_template_part( 'members/single/messages' );
 
-                    elseif ( bp_is_user_forums() ) :
-                            bp_get_template_part( 'members/single/forums'   );
+            elseif ( bp_is_user_profile() ) :
+                bp_get_template_part( 'members/single/profile'  );
 
-                    elseif ( bp_is_user_notifications() ) :
-                            bp_get_template_part( 'members/single/notifications' );
+            elseif ( bp_is_user_forums() ) :
+                bp_get_template_part( 'members/single/forums'   );
 
-                    elseif ( bp_is_user_settings() ) :
-                            bp_get_template_part( 'members/single/settings' );
+            elseif ( bp_is_user_notifications() ) :
+                bp_get_template_part( 'members/single/notifications' );
 
-                    // If nothing sticks, load a generic template
-                    else :
-                            bp_get_template_part( 'members/single/plugins'  );
+            elseif ( bp_is_user_settings() ) :
+                bp_get_template_part( 'members/single/settings' );
 
-                    endif;
+            // If nothing sticks, load a generic template
+            else :
+                    bp_get_template_part( 'members/single/plugins'  );
 
-                    do_action( 'bp_after_member_body' ); ?>
+            endif;
 
-            </div><!-- #item-body -->
-            
-        </div>
+            do_action( 'bp_after_member_body' ); ?>
 
-	<?php
+        </div> <!-- #item-body -->
 
-	/**
-	 * Fires after the display of member home content.
-	 *
-	 * @since 1.2.0
-	 */
-	do_action( 'bp_after_member_home_content' ); ?>
+    </div> <!-- #item-content -->
 
-</div><!-- #buddypress -->
+    <?php
+
+    /**
+     * Fires after the display of member home content.
+     *
+     * @since 1.2.0
+     */
+    do_action( 'bp_after_member_home_content' ); ?>
+
+</div> <!-- #buddypress -->
